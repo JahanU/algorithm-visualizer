@@ -1,1 +1,7 @@
-<p>algorithm-visualizer works!</p>
+<div class="row">
+    <div class="array-container col-12">
+        <p class="array-body" *ngFor="let num of numbers">
+            <span class="array-element" [ngStyle]="{'height.px': num}"></span>
+        </p>
+    </div>
+</div>

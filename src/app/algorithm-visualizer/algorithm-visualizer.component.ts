@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlgorithmVisualizerComponent implements OnInit {
 
-  constructor() { }
+  numbers: number[];
+
+  constructor() {
+    this.numbers = [];
+  }
 
   ngOnInit(): void {
+    this.resetArray();
+  }
+
+
+  resetArray() {
+    this.numbers = [];
+    for (let i = 0; i < 100; i++) {
+      this.numbers.push(this.randomInteger(5, 700));
+    }
+  }
+
+  randomInteger(min, max) {
+    https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 }
