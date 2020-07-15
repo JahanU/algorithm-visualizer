@@ -10,7 +10,11 @@
     <div class="row">
         <div class="array-container col-12">
             <p class="array-body" *ngFor="let num of numbers">
-                <span class="array-element" [ngStyle]="{'height.px': num}"></span>
+                <span class="array-element" [ngStyle]="{
+                        'height.px': num, 
+                        'background-color' : setBarColors(num)
+                    }">{{num}}</span>
+
             </p>
         </div>
     </div>
