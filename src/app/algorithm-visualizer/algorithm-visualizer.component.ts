@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { MergeSort } from './algorithms/merge-sort';
+import { BubbleSort } from './algorithms/bubble-sort';
 
 @Component({
   selector: 'app-algorithm-visualizer',
@@ -12,7 +13,6 @@ export class AlgorithmVisualizerComponent implements OnInit {
   unsortedNumbers: number[];
   outerValue: number;
   innerValue: number;
-
   swapped: boolean;
 
   constructor() {
@@ -78,30 +78,18 @@ export class AlgorithmVisualizerComponent implements OnInit {
   }
 
 
-  async bubbleSort() {
-    for (let i = 0; i < this.numbers.length; i++) {
-      this.outerValue = this.numbers[i];
-      await this.sleep(1);
-
-      for (let j = i; j < this.numbers.length; j++) {
-        this.innerValue = this.numbers[j];
-        await this.sleep(1);
-
-        if (this.numbers[i] > this.numbers[j]) {
-          this.swapped = true;
-          await this.sleep(1);
-
-          let temp = this.numbers[j];
-          this.numbers[j] = this.numbers[i];
-          this.numbers[i] = temp;
-
-          await this.sleep(1);
-          this.swapped = false;
-
-        }
-      }
-    }
+  bubbleSort() {
+    let bubbleSort: BubbleSort = new BubbleSort();
+    bubbleSort.bubbleSort(this.numbers);
+    console.log('sorted: ', this.numbers);
   }
+
+  mergeSort() {
+    let sort: MergeSort = new MergeSort();
+    sort.sort(this.numbers);
+    console.log('sorted: ', this.numbers);
+  }
+
 
 
 }
