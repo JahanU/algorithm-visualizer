@@ -2,20 +2,21 @@
     <!-- <span>Algorithm Visualizer</span> -->
     <button type="button" class="btn btn-primary" (click)=resetArray()>Generate New Array</button>
     <button type="button" class="btn btn-light" (click)=bubbleSort()>Bubble Sort</button>
-    <button type="button" class="btn btn-light" (click)="mergeSort(numbers, numbers.length)">Merge Sort</button>
-
-
-
+    <!-- <button type="button" class="btn btn-light" (click)="mergeSort(numbers, numbers.length)">Merge Sort</button> -->
 </mat-toolbar>
+
 <div class="container-fluid">
     <div class="row">
         <div class="array-container col-12">
             <p class="array-body" *ngFor="let num of numbers">
                 <span class="array-element" [ngStyle]="{
                         'height.px': num, 
-                        'background-color' : setBarColors(num)
+                        'background-color' : setBarColors()
                     }">{{num}}</span>
             </p>
+
         </div>
     </div>
 </div>
+
+<hr>
