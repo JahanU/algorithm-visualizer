@@ -1,19 +1,64 @@
+import { ArraysService } from 'src/app/shared/arrays.service';
+import { merge } from 'rxjs';
 
 export class MergeSort {
 
-    private temp: number[] = [];
+    animations = [];
 
-    constructor() { }
+    constructor(private readonly arraysService: ArraysService) { }
     /**
      * Starts the soring process.
      *
      * @method sort
      * @param {Array} arry The array to be sorted.
      */
-    public sort(arry: number[]): void {
-        if (arry !== undefined) {
-            this.mergeSort(arry, this.temp, 0, arry.length - 1);
+    mergeSort(array: number[], arrayLength: number) {
+
+        if (arrayLength < 2) {
+            return;
         }
+
+        let middle = Math.floor(arrayLength / 2);
+        let end = arrayLength - middle;
+
+        let leftArray = [];
+        let rightArray = [];
+
+        for (let i = 0; i < middle; i++)
+            leftArray[i] = array[i];
+
+        for (let i = middle; i < arrayLength; i++)
+            rightArray[i - middle] = array[i];
+
+        this.mergeSort(leftArray, middle);
+        this.mergeSort(rightArray, end);
+        this.merge(array, leftArray, rightArray, middle, end);
+    }
+
+    merge(array: number[], leftArray: number[], rightArray: number[], middle: number, end: number) {
+
+        let leftIndex = 0;
+        let rightIndex = 0;
+        let index = 0;
+
+        while (leftIndex < middle && rightIndex < end) {
+            if (leftArray[leftIndex] <= rightArray[rightIndex]) {
+                array[index++] = leftArray[leftIndex++];
+            }
+            else {
+                array[index++] = rightArray[rightIndex++];
+            }
+        }
+
+        while (leftIndex < middle) {
+            array[index++] = leftArray[leftIndex++];
+        }
+        while (rightIndex < end) {
+            array[index++] = rightArray[rightIndex++];
+        }
+
+        return array;
+
     }
 
     /**
@@ -21,55 +66,8 @@ export class MergeSort {
      *
      * @method mergeSort
      * @param {Array} arr The array to be sorted.
-     * @param {Array} temp The temporary array.
-     * @param {Number} left The left index of the array.
-     * @param {Number} right The right index of the array.
      */
-    public mergeSort(arr: number[], temp: number[], left: number, right: number): void {
-        if (left < right) {
-            let center: number = Math.floor((left + right) / 2);
-            this.mergeSort(arr, temp, left, center);
-            this.mergeSort(arr, temp, center + 1, right);
-            this.merge(arr, temp, left, center + 1, right);
-        }
-    }
 
-    /**
-     * This method contains the logic to implement the merge step.
-     *
-     * @method merge
-     * @param {Array} arr The array to be sorted.
-     * @param {Array} temp The temporary array.
-     * @param {Number} left The left index of the array.
-     * @param {Number} right The right index of the array. 
-     * @param {Number} rightEnd The right most index of the array.     */
-    public merge(arr: number[], temp: number[], left: number, right: number, rightEnd: number): void {
-
-        let leftEnd: number = right - 1;
-        let k: number = left;
-        let num: number = rightEnd - left + 1;
-
-        while (left <= leftEnd && right <= rightEnd) {
-            if (arr[left] <= arr[right]) {
-                temp[k++] = arr[left++];
-            } else {
-                temp[k++] = arr[right++]
-            }
-        }
-
-        while (left <= leftEnd) {
-            temp[k++] = arr[left++];
-        }
-
-        while (right <= rightEnd) {
-            temp[k++] = arr[right++];
-        }
-
-        for (let i: number = 0; i < temp.length; i++, rightEnd--) {
-            arr[rightEnd] = temp[rightEnd];
-        }
-
-    }
 
 
 

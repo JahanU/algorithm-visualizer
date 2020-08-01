@@ -1,10 +1,11 @@
 import { Output } from '@angular/core';
-
+import { AlgorithmVisualizerComponent } from '../algorithm-visualizer.component';
+import { ArraysService } from 'src/app/shared/arrays.service';
 export class BubbleSort {
 
     animations = [];
 
-    constructor() { }
+    constructor(private readonly arraysService: ArraysService) { }
 
 
     bubbleSort(array) {
@@ -22,12 +23,28 @@ export class BubbleSort {
             }
         }
     }
-
     swap(arr, i, j) {
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    bubbleSortAnimation() {
+        if (this.animations) { // have animations
+            const timer = setInterval(() => {
+                let action = this.animations.shift();
+                if (action) {
+                    let temp = this.arraysService.numbers[action[0]];
+                    this.arraysService.numbers[action[0]] = this.arraysService.numbers[action[1]];
+                    this.arraysService.numbers[action[1]] = temp;
+                }
+                else {
+                    clearInterval(timer);
+                }
+            }, 10);
+        }
+    }
+
 
 }
 
