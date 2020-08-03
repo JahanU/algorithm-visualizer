@@ -6,32 +6,36 @@ import { Injectable } from '@angular/core';
 export class ArraysService {
 
   numbers: number[];
-  unsortedNumbers: number[];
 
   constructor() { }
 
 
   resetArray() {
     this.numbers = [];
-    this.unsortedNumbers = [];
     for (let i = 0; i < 20; i++) {
       let randInt = this.randomInteger(15, 400);
       this.numbers.push(randInt);
-      this.unsortedNumbers.push(randInt);
     }
   }
 
   randomInteger(min, max) {
-    https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
+    //https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  isArraySorted() {
-    this.unsortedNumbers.sort((a, b) => a - b);
-    for (let i = 0; i < this.unsortedNumbers.length; i++) {
-      if (this.unsortedNumbers[i] !== this.numbers[i])
+  isArraySorted(array: number[]) {
+    let numCopy = [...array];
+    numCopy.sort((a, b) => a - b);
+    for (let i = 0; i < numCopy.length; i++) {
+      if (numCopy[i] !== array[i])
         return false;
     }
     return true;
   }
+
+  getIsArraySorted() {
+    return this.isArraySorted(this.numbers);
+  }
+
+
 }

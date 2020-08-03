@@ -41,7 +41,7 @@ export class BubbleSort {
                 else {
                     clearInterval(timer);
                 }
-            }, 10);
+            }, 30);
         }
     }
 
