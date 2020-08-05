@@ -4,8 +4,8 @@ import { ArrayBars } from '../models/ArrayBars';
   providedIn: 'root',
 })
 export class ArraysService {
-  ARRAY_LENGTH = 20;
-  ANIMATION_SPEED = 10;
+  ARRAY_LENGTH: number = 10;
+  ANIMATION_SPEED: number = 10;
   completedAnimation = [];
   numbers: ArrayBars[];
 
@@ -14,7 +14,7 @@ export class ArraysService {
   resetArray() {
     this.numbers = [];
     for (let i = 0; i < this.ARRAY_LENGTH; i++) {
-      let randInt = this.randomInteger(15, 800);
+      let randInt = this.randomInteger(5, 100);
       this.numbers.push({ value: randInt, colour: 'rgb(9, 168, 168)' });
     }
   }
@@ -32,20 +32,21 @@ export class ArraysService {
       this.completedAnimation.push({ index: i });
     }
     this.completedAnimation.push({ index: array.length - 1 }); // Append last index
-
-    console.log('array is sorted');
-    console.log(this.completedAnimation);
     return true;
   }
 
   animateSortedArray() {
     const timer = setInterval(() => {
-      const action = this.completedAnimation.shift();
+      const action: animationValues = this.completedAnimation.shift();
       if (action) {
         this.numbers[action.index].colour = 'purple';
       } else {
         clearInterval(timer);
       }
-    }, 40);
+    }, this.ANIMATION_SPEED);
   }
+}
+
+interface animationValues {
+  index: number;
 }

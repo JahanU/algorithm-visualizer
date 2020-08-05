@@ -2,7 +2,7 @@ import { ArraysService } from 'src/app/shared/arrays.service';
 import { ArrayBars } from 'src/app/models/ArrayBars';
 
 export class MergeSort {
-  animations = []; // Stores array objects => { key, value }
+  animations: animationValues[] = []; // Stores array objects => { key, value }
 
   constructor(private readonly arrService: ArraysService) {}
 
@@ -12,29 +12,31 @@ export class MergeSort {
     }
 
     let mid = Math.floor(left + (right - left) / 2);
-    this.mergeSort(array, left, mid);
-    this.mergeSort(array, mid + 1, right);
+    this.mergeSort(array, left, mid); // Sort left side of the array, 0 to mid
+    this.mergeSort(array, mid + 1, right); // mid to end
     this.merge(array, left, mid, right);
   }
 
   merge(array, left, mid, right): void {
     let aux = [...array];
 
-    let i = left;
-    let j = mid + 1;
-    for (let k = left; k <= right; k++) {
-      if (i > mid) {
-        this.animations.push(new animationValues(k, aux[j].value));
-        array[k] = aux[j++];
-      } else if (j > right) {
-        this.animations.push(new animationValues(k, aux[i].value));
-        array[k] = aux[i++];
-      } else if (aux[i].value > aux[j].value) {
-        this.animations.push(new animationValues(k, aux[j].value));
-        array[k] = aux[j++];
+    let midIndex = mid + 1;
+    let leftIndex = left;
+
+    for (let k = leftIndex; k <= right; k++) {
+      if (leftIndex > mid) {
+        // start index has surpassed the middle
+        this.animations.push({ index: k, value: aux[midIndex].value });
+        array[k] = aux[midIndex++];
+      } else if (midIndex > right) {
+        this.animations.push({ index: k, value: aux[leftIndex].value });
+        array[k] = aux[leftIndex++];
+      } else if (aux[leftIndex].value > aux[midIndex].value) {
+        this.animations.push({ index: k, value: aux[midIndex].value });
+        array[k] = aux[midIndex++];
       } else {
-        this.animations.push(new animationValues(k, aux[i].value));
-        array[k] = aux[i++];
+        this.animations.push({ index: k, value: aux[leftIndex].value });
+        array[k] = aux[leftIndex++];
       }
     }
   }
@@ -43,7 +45,7 @@ export class MergeSort {
     let animations = setInterval(() => {
       const action: animationValues = this.animations.shift();
       console.log('animations: ', this.animations);
-      if (action) this.arrService.numbers[action.key].value = action.value;
+      if (action) this.arrService.numbers[action.index].value = action.value;
       else {
         clearInterval(animations);
         this.arrService.isArraySorted(this.arrService.numbers);
@@ -53,12 +55,7 @@ export class MergeSort {
   }
 }
 
-class animationValues {
-  key: number;
+interface animationValues {
+  index: number;
   value: number;
-
-  constructor(key: number, value: number) {
-    this.key = key;
-    this.value = value;
-  }
 }

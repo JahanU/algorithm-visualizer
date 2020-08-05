@@ -3,11 +3,39 @@
   <button type="button" class="btn btn-primary" (click)="resetArray()">
     Generate New Array
   </button>
-  <button type="button" class="btn btn-light" (click)="bubbleSort()">
-    Bubble Sort
-  </button>
-  <button type="button" class="btn btn-light" (click)="mergeSort()">
-    Merge Sort
+
+  <div class="btn-group" dropdown [insideClick]="true">
+    <button
+      id="button-animated"
+      dropdownToggle
+      type="button"
+      class="btn btn-primary dropdown-toggle"
+      aria-controls="dropdown-animated"
+    >
+      {{ selectedAlgorithm }} <span class="caret"></span>
+    </button>
+    <ul
+      id="dropdown-animated"
+      *dropdownMenu
+      class="dropdown-menu"
+      role="menu"
+      aria-labelledby="button-animated"
+    >
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="selectedAlgorithm = 'Bubble Sort'"
+          >Bubble Sort</a
+        >
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="selectedAlgorithm = 'Merge Sort'"
+          >Merge Sort</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <button type="button" class="btn btn-danger" (click)="startSorting()">
+    Sort
   </button>
 </mat-toolbar>
 

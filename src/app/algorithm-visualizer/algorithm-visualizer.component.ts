@@ -3,13 +3,22 @@ import { MergeSort } from './algorithms/merge-sort';
 import { BubbleSort } from './algorithms/bubble-sort';
 import { ArraysService } from '../shared/arrays.service';
 import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-algorithm-visualizer',
   templateUrl: './algorithm-visualizer.component.html',
   styleUrls: ['./algorithm-visualizer.component.scss'],
+  providers: [
+    {
+      provide: BsDropdownConfig,
+      useValue: { isAnimated: true, autoClose: true },
+    },
+  ],
 })
 export class AlgorithmVisualizerComponent implements OnInit {
+  selectedAlgorithm: string = 'Algorithms';
+
   constructor(public arrService: ArraysService) {}
 
   ngOnInit(): void {
@@ -24,9 +33,18 @@ export class AlgorithmVisualizerComponent implements OnInit {
     return colour;
   }
 
+  startSorting() {
+    // TODO: Use Enum later
+    if (this.selectedAlgorithm.includes('bubble')) {
+      this.bubbleSort();
+    } else {
+      this.mergeSort();
+    }
+  }
+
   bubbleSort() {
     const bs = new BubbleSort(this.arrService);
-    const inputCopy = [...this.arrService.numbers];
+    let inputCopy = [...this.arrService.numbers];
     bs.bubbleSort(inputCopy);
     bs.bubbleSortAnimation();
   }
@@ -35,7 +53,6 @@ export class AlgorithmVisualizerComponent implements OnInit {
     const ms: MergeSort = new MergeSort(this.arrService);
     let numbersCopy = [...this.arrService.numbers];
     ms.mergeSort(numbersCopy, 0, numbersCopy.length - 1);
-    // this.arrService.isArraySorted(numbersCopy);
     ms.mergeSortAnimation();
   }
 }
