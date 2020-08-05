@@ -4,8 +4,8 @@ import { ArrayBars } from '../models/ArrayBars';
   providedIn: 'root',
 })
 export class ArraysService {
-  ARRAY_LENGTH = 25;
-  ANIMATION_SPEED = 1;
+  ARRAY_LENGTH = 20;
+  ANIMATION_SPEED = 10;
   completedAnimation = [];
   numbers: ArrayBars[];
 
@@ -15,7 +15,7 @@ export class ArraysService {
     this.numbers = [];
     for (let i = 0; i < this.ARRAY_LENGTH; i++) {
       let randInt = this.randomInteger(15, 800);
-      this.numbers.push({ value: randInt, colour: '' });
+      this.numbers.push({ value: randInt, colour: 'rgb(9, 168, 168)' });
     }
   }
 
@@ -25,21 +25,27 @@ export class ArraysService {
   }
 
   isArraySorted(array: ArrayBars[]) {
-    let numCopy = [...array];
-    numCopy.sort((a, b) => a.value - b.value);
-
-    console.log('sorted num copy: ', numCopy);
-    console.log('unsorted array: ', array);
-
-    for (let i = 0; i < numCopy.length; i++) {
-      if (numCopy[i].value !== array[i].value) return false;
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i].value > array[i + 1].value) {
+        return false;
+      }
+      this.completedAnimation.push({ index: i });
     }
+    this.completedAnimation.push({ index: array.length - 1 }); // Append last index
 
-    console.log('sorted!');
+    console.log('array is sorted');
+    console.log(this.completedAnimation);
     return true;
   }
 
-  getIsArraySorted() {
-    return this.isArraySorted(this.numbers);
+  animateSortedArray() {
+    const timer = setInterval(() => {
+      const action = this.completedAnimation.shift();
+      if (action) {
+        this.numbers[action.index].colour = 'purple';
+      } else {
+        clearInterval(timer);
+      }
+    }, 40);
   }
 }

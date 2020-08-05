@@ -4,7 +4,7 @@ import { ArrayBars } from 'src/app/models/ArrayBars';
 export class MergeSort {
   animations = []; // Stores array objects => { key, value }
 
-  constructor(private readonly arraysService: ArraysService) {}
+  constructor(private readonly arrService: ArraysService) {}
 
   mergeSort(array: ArrayBars[], left: number, right: number): void {
     if (right <= left) {
@@ -40,12 +40,16 @@ export class MergeSort {
   }
 
   mergeSortAnimation(): void {
-    let animation = setInterval(() => {
+    let animations = setInterval(() => {
       const action: animationValues = this.animations.shift();
       console.log('animations: ', this.animations);
-      if (action) this.arraysService.numbers[action.key].value = action.value;
-      else clearInterval(animation);
-    }, this.arraysService.ANIMATION_SPEED);
+      if (action) this.arrService.numbers[action.key].value = action.value;
+      else {
+        clearInterval(animations);
+        this.arrService.isArraySorted(this.arrService.numbers);
+        this.arrService.animateSortedArray();
+      }
+    }, this.arrService.ANIMATION_SPEED);
   }
 }
 
