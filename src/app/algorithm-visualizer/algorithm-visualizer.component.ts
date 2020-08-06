@@ -33,9 +33,15 @@ export class AlgorithmVisualizerComponent implements OnInit {
     return colour;
   }
 
+  pitch(event: any) {
+    console.log(event.value);
+    this.arrService.arrayLength = event.value;
+    this.arrService.resetArray();
+  }
+
   startSorting() {
     // TODO: Use Enum later
-    if (this.selectedAlgorithm.includes('bubble')) {
+    if (this.selectedAlgorithm.includes('Bubble')) {
       this.bubbleSort();
     } else {
       this.mergeSort();

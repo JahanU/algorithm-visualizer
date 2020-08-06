@@ -7,8 +7,9 @@
 }
 
 .array-element {
-  width: 30px;
-  margin: 2px;
+  width: 10px;
+  margin: 0px 4px 0px 4px;
+  color: rgb(9, 168, 168);
   display: inline-block;
 }
 
@@ -19,4 +20,12 @@ button {
 
 .mat-form-field.mat-select {
   background: #fff;
+}
+
+hr {
+  margin: 10px 0px 0px 0px;
+}
+
+mat-slider {
+  margin-top: 16px;
 }

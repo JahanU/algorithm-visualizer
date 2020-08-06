@@ -4,7 +4,7 @@ import { ArrayBars } from '../models/ArrayBars';
   providedIn: 'root',
 })
 export class ArraysService {
-  ARRAY_LENGTH: number = 10;
+  public arrayLength: number = 30;
   ANIMATION_SPEED: number = 10;
   completedAnimation = [];
   numbers: ArrayBars[];
@@ -13,8 +13,8 @@ export class ArraysService {
 
   resetArray() {
     this.numbers = [];
-    for (let i = 0; i < this.ARRAY_LENGTH; i++) {
-      let randInt = this.randomInteger(5, 100);
+    for (let i = 0; i < this.arrayLength; i++) {
+      let randInt = this.randomInteger(20, 100);
       this.numbers.push({ value: randInt, colour: 'rgb(9, 168, 168)' });
     }
   }

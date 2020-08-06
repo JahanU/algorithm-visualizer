@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlgorithmVisualizerComponent } from './algorithm-visualizer/algorithm-visualizer.component';
 import { MatSelectModule } from '@angular/material/select';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [AppComponent, AlgorithmVisualizerComponent],
@@ -15,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MatToolbarModule,
     MatIconModule,
     MatSelectModule,
+    MatSliderModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
   ],
