@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ArrayBars } from '../models/ArrayBars';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ArraysService {
   public arrayLength: number = 30;
-  ANIMATION_SPEED: number = 10;
+  public animationSpeed: number = 50;
   completedAnimation = [];
   numbers: ArrayBars[];
 
@@ -15,7 +16,7 @@ export class ArraysService {
     this.numbers = [];
     for (let i = 0; i < this.arrayLength; i++) {
       let randInt = this.randomInteger(20, 100);
-      this.numbers.push({ value: randInt, colour: 'rgb(9, 168, 168)' });
+      this.numbers.push({ value: randInt, colour: '#09A8A8' });
     }
   }
 
@@ -43,7 +44,7 @@ export class ArraysService {
       } else {
         clearInterval(timer);
       }
-    }, this.ANIMATION_SPEED);
+    }, this.animationSpeed);
   }
 }
 

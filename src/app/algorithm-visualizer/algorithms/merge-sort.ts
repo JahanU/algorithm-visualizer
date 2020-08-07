@@ -49,7 +49,7 @@ export class MergeSort {
         this.arrService.isArraySorted(this.arrService.numbers);
         this.arrService.animateSortedArray();
       }
-    }, this.arrService.ANIMATION_SPEED);
+    }, this.arrService.animationSpeed);
   }
 }
 

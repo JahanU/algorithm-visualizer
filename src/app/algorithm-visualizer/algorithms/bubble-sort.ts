@@ -2,6 +2,7 @@ import { Output } from '@angular/core';
 import { AlgorithmVisualizerComponent } from '../algorithm-visualizer.component';
 import { ArraysService } from 'src/app/shared/arrays.service';
 import { ArrayBars } from 'src/app/models/ArrayBars';
+
 export class BubbleSort {
   animations = [];
   constructor(private readonly arrService: ArraysService) {}
@@ -35,6 +36,6 @@ export class BubbleSort {
         this.arrService.isArraySorted(this.arrService.numbers);
         this.arrService.animateSortedArray();
       }
-    }, this.arrService.ANIMATION_SPEED);
+    }, this.arrService.animationSpeed);
   }
 }

@@ -22,13 +22,24 @@
       aria-labelledby="button-animated"
     >
       <li role="menuitem">
-        <a class="dropdown-item" (click)="selectedAlgorithm = 'Bubble Sort'"
+        <a
+          class="dropdown-item"
+          (click)="selectedAlgorithm = algorithmEnum.BUBBLE"
           >Bubble Sort</a
         >
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="selectedAlgorithm = 'Merge Sort'"
+        <a
+          class="dropdown-item"
+          (click)="selectedAlgorithm = algorithmEnum.MERGE"
           >Merge Sort</a
+        >
+      </li>
+      <li role="menuitem">
+        <a
+          class="dropdown-item"
+          (click)="selectedAlgorithm = algorithmEnum.QUICK"
+          >Quick Sort</a
         >
       </li>
     </ul>
@@ -38,13 +49,24 @@
     Sort
   </button>
 
+  <small>Array Size</small>
   <mat-slider
     thumbLabel
     tickInterval="auto"
     min="4"
     max="100"
-    (input)="pitch($event)"
-    value="{{ arrService.numbers.length }}"
+    (input)="pitchSize($event)"
+    value="{{ arrService.arrayLength }}"
+  ></mat-slider>
+
+  <small>Iteration Speed </small>
+  <mat-slider
+    thumbLabel
+    tickInterval="auto"
+    min="1"
+    max="100"
+    (input)="pitchSpeed($event)"
+    value="{{ arrService.animationSpeed }}"
   ></mat-slider>
 </mat-toolbar>
 
