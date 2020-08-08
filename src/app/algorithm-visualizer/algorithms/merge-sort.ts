@@ -11,7 +11,7 @@ export class MergeSort {
       return;
     }
 
-    let mid = Math.floor(left + (right - left) / 2);
+    let mid = Math.floor((left + right) / 2);
     this.mergeSort(array, left, mid); // Sort left side of the array, 0 to mid
     this.mergeSort(array, mid + 1, right); // mid to end
     this.merge(array, left, mid, right);

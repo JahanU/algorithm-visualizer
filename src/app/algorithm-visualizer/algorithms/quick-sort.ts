@@ -1,11 +1,12 @@
 import { ArraysService } from '../../shared/arrays.service';
+import { ArrayBars } from '../../models/ArrayBars';
 
 export class QuickSort {
   animations = [];
 
-  constructor(private readonly arrService: ArraysService) {}
+  constructor(private readonly arrService: ArraysService) { }
 
-  quickSort(arr) {
+  quickSort(arr: ArrayBars[]): void {
     // Edge case:
     /* 
     If the array is already sorted, then we do not need to perform quicksort.
@@ -20,44 +21,37 @@ export class QuickSort {
     }
   }
 
-  sort(arr, low, high) {
-    if (low < high) {
+  sort(arr: ArrayBars[], left: number, right: number): void {
+    if (left < right) {
       // partitioning index, arr[pi] correct place?
-      let pi = this.partition(arr, low, high);
+      let pi = this.partition(arr, left, right);
 
       // Recursively sort elements before/after partition
-      this.sort(arr, low, pi - 1);
-      this.sort(arr, pi + 1, high);
+      this.sort(arr, left, pi - 1);
+      this.sort(arr, pi + 1, right);
     }
   }
 
-  partition(arr, left, high) {
-    let pivotValue = arr[high].value; // pivot set to last element
-    let leftIndex = left - 1; // left/low index
+  partition(arr: ArrayBars[], left: number, right: number): number {
 
-    for (let i = left; i < high; i++) {
-      // low to high
+    const pivotValue = arr[right].value; // pivot set to last element
+    let low = left - 1; // left/low index
 
+    for (let i = left; i < right; i++) {
       if (arr[i].value < pivotValue) {
-        leftIndex++;
-        this.animations.push({ low: leftIndex, index: i, pivot: high });
-        this.swap(arr, leftIndex, i);
+        low++;
+        this.animations.push({ leftIndex: low, index: i, pivot: right });
+        this.arrService.swap(arr, low, i);
       }
     }
 
-    this.animations.push({ low: leftIndex + 1, index: high, pivot: high });
-    this.swap(arr, leftIndex + 1, high);
+    this.animations.push({ leftIndex: low + 1, index: right, pivot: right });
+    this.arrService.swap(arr, low + 1, right);
 
-    return leftIndex + 1;
+    return low + 1;
   }
 
-  swap(arr, left, right) {
-    let temp = arr[left];
-    arr[left] = arr[right];
-    arr[right] = temp;
-  }
-
-  quickSortAnimation() {
+  quickSortAnimation(): void {
     const timer = setInterval(() => {
       const action: animationValues = this.animations.shift();
       console.log(action);
@@ -66,12 +60,7 @@ export class QuickSort {
         this.arrService.numbers.map((num) => (num.colour = '#09A8A8'));
         this.arrService.numbers[action.pivot].colour = 'red';
 
-        // swap
-        let temp = this.arrService.numbers[action.low];
-        this.arrService.numbers[action.low] = this.arrService.numbers[
-          action.index
-        ];
-        this.arrService.numbers[action.index] = temp;
+        this.arrService.swap(this.arrService.numbers, action.leftIndex, action.index);
       } else {
         clearInterval(timer);
         this.arrService.isArraySorted(this.arrService.numbers);
@@ -82,7 +71,7 @@ export class QuickSort {
 }
 
 interface animationValues {
-  low: number;
+  leftIndex: number;
   index: number;
   pivot: number;
 }
