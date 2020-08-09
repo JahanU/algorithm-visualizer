@@ -31,6 +31,13 @@
       <li role="menuitem">
         <a
           class="dropdown-item"
+          (click)="selectedAlgorithm = algorithmEnum.INSERTION"
+          >Insertion Sort</a
+        >
+      </li>
+      <li role="menuitem">
+        <a
+          class="dropdown-item"
           (click)="selectedAlgorithm = algorithmEnum.MERGE"
           >Merge Sort</a
         >
@@ -42,13 +49,7 @@
           >Quick Sort</a
         >
       </li>
-      <li role="menuitem">
-        <a
-          class="dropdown-item"
-          (click)="selectedAlgorithm = algorithmEnum.INSERTION"
-          >Insertion Sort</a
-        >
-      </li>
+
     </ul>
   </div>
 

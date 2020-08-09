@@ -61,14 +61,13 @@ export class AlgorithmVisualizerComponent implements OnInit {
     const numbersCopy = [...this.arrService.numbers];
     bs.bubbleSort(numbersCopy);
     bs.bubbleSortAnimation();
-    console.log(numbersCopy);
   }
 
   insertionSort(): void {
     const is = new InsertionSort(this.arrService);
     const numbersCopy = [...this.arrService.numbers];
     is.insertionSort(numbersCopy);
-    this.arrService.numbers = [...numbersCopy];
+    is.insertionSortAnimation();
   }
 
   mergeSort(): void {
@@ -84,4 +83,5 @@ export class AlgorithmVisualizerComponent implements OnInit {
     qs.quickSort(numbersCopy);
     qs.quickSortAnimation();
   }
+
 }

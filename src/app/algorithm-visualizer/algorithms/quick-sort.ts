@@ -2,7 +2,7 @@ import { ArraysService } from '../../shared/arrays.service';
 import { ArrayBars } from '../../models/ArrayBars';
 
 export class QuickSort {
-  animations = [];
+  animations: animationValues[] = [];
 
   constructor(private readonly arrService: ArraysService) { }
 
@@ -14,11 +14,11 @@ export class QuickSort {
     on the sorted array, thus making the time complexity o(N^2), but by performing 
     a simple o(N) check condition, we can then get the average case: o(n log(n))
     */
-    if (this.arrService.isArraySorted(arr)) {
+    if (this.arrService.isArraySorted(arr))
       return;
-    } else {
+    else
       this.sort(arr, 0, arr.length - 1);
-    }
+
   }
 
   sort(arr: ArrayBars[], left: number, right: number): void {
@@ -44,7 +44,6 @@ export class QuickSort {
         this.arrService.swap(arr, low, i);
       }
     }
-
     this.animations.push({ leftIndex: low + 1, index: right, pivot: right });
     this.arrService.swap(arr, low + 1, right);
 
@@ -63,8 +62,8 @@ export class QuickSort {
         this.arrService.swap(this.arrService.numbers, action.leftIndex, action.index);
       } else {
         clearInterval(timer);
-        this.arrService.isArraySorted(this.arrService.numbers);
-        this.arrService.animateSortedArray();
+        if (this.arrService.isArraySorted(this.arrService.numbers))
+          this.arrService.animateSortedArray();
       }
     }, this.arrService.animationSpeed);
   }
