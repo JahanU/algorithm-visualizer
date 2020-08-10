@@ -51,9 +51,10 @@ export class QuickSort {
   }
 
   quickSortAnimation(): void {
+    this.arrService.sortingAnimationsMax = this.animations.length;
     const timer = setInterval(() => {
       const action: animationValues = this.animations.shift();
-      console.log(action);
+      this.arrService.sortingAnimationsLeft = this.animations.length;
       if (action) {
         // Pivot
         this.arrService.numbers.map((num) => (num.colour = '#09A8A8'));
@@ -62,8 +63,10 @@ export class QuickSort {
         this.arrService.swap(this.arrService.numbers, action.leftIndex, action.index);
       } else {
         clearInterval(timer);
-        if (this.arrService.isArraySorted(this.arrService.numbers))
+        if (this.arrService.isArraySorted(this.arrService.numbers)) {
           this.arrService.animateSortedArray();
+          this.arrService.sorting = false;
+        }
       }
     }, this.arrService.animationSpeed);
   }

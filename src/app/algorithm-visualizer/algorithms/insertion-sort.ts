@@ -20,16 +20,19 @@ export class InsertionSort {
 
 
   insertionSortAnimation() {
-
+    this.arrService.sortingAnimationsMax = this.animations.length;
     const timer = setInterval(() => {
       const action: animationValues = this.animations.shift();
+      this.arrService.sortingAnimationsLeft = this.animations.length;
       if (action)
         this.arrService.swap(this.arrService.numbers, action.leftIndex, action.rightIndex);
 
       else {
         clearInterval(timer);
-        if (this.arrService.isArraySorted(this.arrService.numbers))
+        if (this.arrService.isArraySorted(this.arrService.numbers)) {
           this.arrService.animateSortedArray();
+          this.arrService.sorting = false;
+        }
       }
     }, this.arrService.animationSpeed)
 

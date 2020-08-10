@@ -5,10 +5,19 @@ import { ArrayBars } from '../models/ArrayBars';
   providedIn: 'root',
 })
 export class ArraysService {
+
   public arrayLength: number = 30;
   public animationSpeed: number = 1;
-  completedAnimation = [];
+
+  sortingAnimationsMax: number;
+  sortingAnimationsLeft: number;
+  sorting: boolean = false;
+  isSorted: boolean = false;
+
   numbers: ArrayBars[];
+
+
+  completedAnimation = []; // Iterating the array once last time, to show it is completed
 
   constructor() { }
 
@@ -18,6 +27,10 @@ export class ArraysService {
       const randInt = this.randomInteger(20, 100);
       this.numbers.push({ value: randInt, colour: '#09A8A8' });
     }
+    this.sortingAnimationsMax = this.numbers.length;
+    this.sortingAnimationsLeft = this.numbers.length;
+    this.isSorted = false;
+    this.sorting = false;
   }
 
   randomInteger(min, max): number {
@@ -39,6 +52,7 @@ export class ArraysService {
       this.completedAnimation.push({ index: i });
     }
     this.completedAnimation.push({ index: array.length - 1 }); // Append last index
+    this.isSorted = true;
     return true;
   }
 

@@ -1,6 +1,6 @@
 <mat-toolbar>
   <!-- <span>Algorithm Visualizer</span> -->
-  <button type="button" class="btn btn-primary" (click)="resetArray()">
+  <button type="button" [disabled]="arrService.sorting" class="btn btn-primary" (click)="resetArray()">
     Generate New Array
   </button>
 
@@ -53,7 +53,7 @@
     </ul>
   </div>
 
-  <button type="button" class="btn btn-danger" (click)="startSorting()">
+  <button type="button" [disabled]="arrService.sorting || arrService.isSorted" class="btn btn-danger" (click)="startSorting()">
     Sort
   </button>
 
@@ -80,7 +80,15 @@
 
 <div class="container-fluid">
   <div class="row">
+
     <div class="array-container col-12">
+
+      <div class="animation-bar col-sm-4">
+        <div class="mb-2">
+          <progressbar max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" type="danger" [striped]="true" [animate]="true"><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}}</i></progressbar>
+        </div>
+      </div>
+
       <hr />
       <p class="array-body" *ngFor="let num of arrService.numbers">
         <span
@@ -96,3 +104,5 @@
     </div>
   </div>
 </div>
+
+
