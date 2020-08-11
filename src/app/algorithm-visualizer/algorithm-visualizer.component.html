@@ -1,9 +1,8 @@
 <mat-toolbar>
-  <!-- <span>Algorithm Visualizer</span> -->
   <button type="button" [disabled]="arrService.sorting" class="btn btn-primary" (click)="resetArray()">
     Generate New Array
   </button>
-
+  
   <div class="btn-group" dropdown [insideClick]="true">
     <button
       id="button-animated"
