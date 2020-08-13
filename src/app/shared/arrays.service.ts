@@ -6,7 +6,7 @@ import { ArrayBars } from '../models/ArrayBars';
 })
 export class ArraysService {
 
-  public arrayLength: number = 30;
+  public arrayLength: number = 10;
   public animationSpeed: number = 1000;
 
   sortingAnimationsMax: number;
@@ -28,7 +28,7 @@ export class ArraysService {
   resetArray(): void {
     this.numbers = [];
     for (let i = 0; i < this.arrayLength; i++) {
-      const randInt = this.randomInteger(20, 300);
+      const randInt = this.randomInteger(20, 500);
       this.numbers.push({ value: randInt, colour: this.$primaryBars });
     }
     this.sortingAnimationsMax = this.numbers.length;

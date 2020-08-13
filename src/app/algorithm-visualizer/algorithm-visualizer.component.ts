@@ -23,7 +23,7 @@ import { ArrayBars } from '../models/ArrayBars';
 export class AlgorithmVisualizerComponent implements OnInit {
 
   algorithmEnum = algorithmEnums;
-  selectedAlgorithm: algorithmEnums = algorithmEnums.BUBBLE;
+  selectedAlgorithm: algorithmEnums = algorithmEnums.MERGE;
 
   constructor(public arrService: ArraysService) { }
 
