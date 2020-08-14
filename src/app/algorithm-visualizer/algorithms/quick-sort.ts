@@ -38,13 +38,15 @@ export class QuickSort {
     let low = left - 1; // left/low index
 
     for (let i = left; i < right; i++) {
+      this.animations.push({ leftIndex: null, rightIndex: null, pivot: right, selectedIndex: i });
+
       if (arr[i].value < pivotValue) {
         low++;
-        this.animations.push({ leftIndex: low, index: i, pivot: right });
+        this.animations.push({ leftIndex: low, rightIndex: i, pivot: right, selectedIndex: null });
         this.arrService.swap(arr, low, i);
       }
     }
-    this.animations.push({ leftIndex: low + 1, index: right, pivot: right });
+    this.animations.push({ leftIndex: low + 1, rightIndex: right, pivot: right, selectedIndex: null });
     this.arrService.swap(arr, low + 1, right);
 
     return low + 1;
@@ -57,10 +59,17 @@ export class QuickSort {
       this.arrService.sortingAnimationsLeft = this.animations.length;
       if (action) {
         // Pivot
-        this.arrService.numbers.map((num) => (num.colour = '#09A8A8'));
-        this.arrService.numbers[action.pivot].colour = 'red';
+        this.arrService.numbers.map((num) => (num.colour = this.arrService.$primaryBars));
+        this.arrService.numbers[action.pivot].colour = 'orange';
 
-        this.arrService.swap(this.arrService.numbers, action.leftIndex, action.index);
+        if (action.selectedIndex != null) {
+          this.arrService.numbers[action.selectedIndex].colour = this.arrService.$selectedIndex;
+        }
+        else {
+          this.arrService.numbers[action.leftIndex].colour = this.arrService.$swappedIndex;
+          this.arrService.numbers[action.rightIndex].colour = this.arrService.$swappedIndex;
+          this.arrService.swap(this.arrService.numbers, action.leftIndex, action.rightIndex);
+        }
       } else {
         clearInterval(timer);
         if (this.arrService.isArraySorted(this.arrService.numbers)) {
@@ -74,6 +83,7 @@ export class QuickSort {
 
 interface animationValues {
   leftIndex: number;
-  index: number;
+  rightIndex: number;
   pivot: number;
+  selectedIndex: number;
 }

@@ -4,8 +4,6 @@ import { ArrayBars } from 'src/app/models/ArrayBars';
 export class BubbleSort {
   animations: animationValues[] = [];
 
-
-
   constructor(private readonly arrService: ArraysService) { }
 
   bubbleSort(array: ArrayBars[]): void {

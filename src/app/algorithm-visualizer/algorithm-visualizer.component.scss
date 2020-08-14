@@ -7,8 +7,15 @@
 }
 
 .array-element {
-  width: 5px;
+  width: 6px;
   margin: 0px 4px 0px 4px;
+  display: inline-block;
+}
+
+.rectangle {
+  width: 6px;
+  height: 10px;
+  margin: 10px 4px 0px 8px;
   display: inline-block;
 }
 

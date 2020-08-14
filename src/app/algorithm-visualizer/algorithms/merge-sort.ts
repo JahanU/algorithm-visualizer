@@ -26,12 +26,15 @@ export class MergeSort {
       if (leftIndex > mid) {
         this.animations.push({ index: k, outerIndex: midIndex, value: aux[midIndex] });
         array[k] = aux[midIndex++];
+
       } else if (midIndex > right) {
         this.animations.push({ index: k, outerIndex: leftIndex, value: aux[leftIndex] });
         array[k] = aux[leftIndex++];
+
       } else if (aux[leftIndex].value > aux[midIndex].value) {
         this.animations.push({ index: k, outerIndex: midIndex, value: aux[midIndex] });
         array[k] = aux[midIndex++];
+
       } else {
         this.animations.push({ index: k, outerIndex: leftIndex, value: aux[leftIndex] });
         array[k] = aux[leftIndex++];

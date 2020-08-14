@@ -7,7 +7,7 @@ import { ArrayBars } from '../models/ArrayBars';
 export class ArraysService {
 
   public arrayLength: number = 10;
-  public animationSpeed: number = 1000;
+  public animationSpeed: number = 500;
 
   sortingAnimationsMax: number;
   sortingAnimationsLeft: number;

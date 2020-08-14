@@ -23,28 +23,28 @@
       <li role="menuitem">
         <a
           class="dropdown-item"
-          (click)="selectedAlgorithm = algorithmEnum.BUBBLE"
+          (click)="displayInfo(algorithmEnum.BUBBLE)"
           >Bubble Sort</a
         >
       </li>
       <li role="menuitem">
         <a
           class="dropdown-item"
-          (click)="selectedAlgorithm = algorithmEnum.INSERTION"
+          (click)="displayInfo(algorithmEnum.INSERTION)"
           >Insertion Sort</a
         >
       </li>
       <li role="menuitem">
         <a
           class="dropdown-item"
-          (click)="selectedAlgorithm = algorithmEnum.MERGE"
+          (click)="displayInfo(algorithmEnum.MERGE)"
           >Merge Sort</a
         >
       </li>
       <li role="menuitem">
         <a
           class="dropdown-item"
-          (click)="selectedAlgorithm = algorithmEnum.QUICK"
+          (click)="displayInfo(algorithmEnum.QUICK)"
           >Quick Sort</a
         >
       </li>
@@ -81,8 +81,13 @@
   <div class="row">
 
     <div class="array-container col-12">
+      
+      <div class="animation-bar col-sm-6">
 
-      <div class="animation-bar col-sm-4">
+        <div class="rectangle" [ngStyle]="{'background-color': 'red'}"> </div>{{algorithmEnum.RED_BAR}} 
+        <div class="rectangle" [ngStyle]="{'background-color': 'orange'}" *ngIf="selectedAlgorithm == algorithmEnum.QUICK"> </div>{{algorithmEnum.ORANGE_BAR}} 
+        <div class="rectangle" [ngStyle]="{'background-color': 'green'}"> </div>{{algorithmEnum.GREEN_BAR}} 
+  
         <div class="mb-2">
           <progressbar max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" type="danger" [striped]="true" [animate]="true"><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}}</i></progressbar>
         </div>
@@ -94,7 +99,7 @@
           class="array-element"
           [ngStyle]="{
             'height.px': num.value,
-            'background-color': setBarColors(num.colour)
+            'background-color': num.colour
           }"
         >
           .</span
