@@ -70,12 +70,14 @@
   <mat-slider
     thumbLabel
     tickInterval="auto"
-    min="1"
-    max="100"
+    [displayWith]="formatLabel"
+    min="0"
+    max="1000"
     (input)="pitchSpeed($event)"
     value="{{ arrService.animationSpeed }}"
   ></mat-slider>
 </mat-toolbar>
+
 
 <div class="container-fluid">
   <div class="row">
