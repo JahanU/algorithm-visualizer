@@ -61,13 +61,14 @@
     thumbLabel
     tickInterval="auto"
     min="4"
-    max="500"
+    max="200"
     (input)="pitchSize($event)"
     value="{{ arrService.arrayLength }}"
   ></mat-slider>
 
   <small>Iteration Speed </small>
   <mat-slider
+    id="speedSlider"
     thumbLabel
     tickInterval="auto"
     [displayWith]="formatLabel"
@@ -86,12 +87,21 @@
       
       <div class="animation-bar col-sm-6">
 
-        <div class="rectangle" [ngStyle]="{'background-color': 'red'}"> </div>{{algorithmEnum.RED_BAR}} 
-        <div class="rectangle" [ngStyle]="{'background-color': 'orange'}" *ngIf="selectedAlgorithm == algorithmEnum.QUICK"> </div>{{algorithmEnum.ORANGE_BAR}} 
-        <div class="rectangle" [ngStyle]="{'background-color': 'green'}"> </div>{{algorithmEnum.GREEN_BAR}} 
-  
+        <table id="colorMeaning" class="array-container">
+          <tr>
+            <td> <div class="rectangle"  [ngStyle]="{'background-color': 'red'}"> </div> </td>
+            <td>{{algorithmEnum.RED_BAR}} </td> 
+            <td  *ngIf="selectedAlgorithm == algorithmEnum.QUICK"> <div class="rectangle"  [ngStyle]="{'background-color': 'orange'}"> </div> </td>
+            <td  *ngIf="selectedAlgorithm == algorithmEnum.QUICK">{{algorithmEnum.ORANGE_BAR}} </td> 
+            <td> <div class="rectangle"  [ngStyle]="{'background-color': 'green'}"> </div> </td>
+            <td>{{algorithmEnum.GREEN_BAR}} </td> 
+          </tr>
+          <tr>
+          </tr>
+        </table>
+        
         <div class="mb-2">
-          <progressbar max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" type="danger" [striped]="true" [animate]="true"><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}}</i></progressbar>
+          <progressbar max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" type="primary" [striped]="true" [animate]="true"><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}}</i></progressbar>
         </div>
       </div>
 

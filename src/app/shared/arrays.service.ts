@@ -7,7 +7,7 @@ import { ArrayBars } from '../models/ArrayBars';
 export class ArraysService {
 
   public arrayLength: number = 10;
-  public animationSpeed: number = 500;
+  public animationSpeed: number = 200;
 
   sortingAnimationsMax: number;
   sortingAnimationsLeft: number;
@@ -68,7 +68,7 @@ export class ArraysService {
       } else {
         clearInterval(timer);
       }
-    }, this.animationSpeed);
+    }, 50);
   }
 }
 

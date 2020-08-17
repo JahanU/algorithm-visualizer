@@ -1,5 +1,18 @@
+button {
+  margin: 14px;
+  padding: 4px 8px 4px 8px;
+}
+
+hr {
+  margin: 10px 0px 0px 0px;
+}
+
 .array-container {
   text-align: center;
+}
+
+table {
+  margin: auto;
 }
 
 .array-body {
@@ -7,8 +20,8 @@
 }
 
 .array-element {
-  width: 6px;
-  margin: 0px 4px 0px 4px;
+  width: 7px;
+  margin: 0px 3px 0px 1px;
   display: inline-block;
 }
 
@@ -16,23 +29,15 @@
   width: 6px;
   height: 10px;
   margin: 10px 4px 0px 8px;
+  padding-bottom: 10px;
   display: inline-block;
-}
-
-button {
-  margin: 14px;
-  padding: 4px 8px 4px 8px;
 }
 
 .mat-form-field.mat-select {
   background: #fff;
 }
 
-hr {
-  margin: 10px 0px 0px 0px;
-}
-
-mat-slider {
+.mat-slider {
   margin-top: 16px;
 }
 
