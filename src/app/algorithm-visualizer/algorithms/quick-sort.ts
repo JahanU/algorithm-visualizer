@@ -38,15 +38,15 @@ export class QuickSort {
     let low = left - 1; // left/low index
 
     for (let i = left; i < right; i++) {
-      this.animations.push({ leftIndex: null, rightIndex: null, pivot: right, selectedIndex: i });
+      this.animations.push({ leftIndex: i, rightIndex: i, pivot: right, isSwapping: false });
 
       if (arr[i].value < pivotValue) {
         low++;
-        this.animations.push({ leftIndex: low, rightIndex: i, pivot: right, selectedIndex: null });
+        this.animations.push({ leftIndex: low, rightIndex: i, pivot: right, isSwapping: true });
         this.arrService.swap(arr, low, i);
       }
     }
-    this.animations.push({ leftIndex: low + 1, rightIndex: right, pivot: right, selectedIndex: null });
+    this.animations.push({ leftIndex: low + 1, rightIndex: right, pivot: right, isSwapping: true });
     this.arrService.swap(arr, low + 1, right);
 
     return low + 1;
@@ -57,13 +57,16 @@ export class QuickSort {
     const timer = setInterval(() => {
       const action: animationValues = this.animations.shift();
       this.arrService.sortingAnimationsLeft = this.animations.length;
+
+
       if (action) {
         // Pivot
         this.arrService.numbers.map((num) => (num.colour = this.arrService.$primaryBars));
         this.arrService.numbers[action.pivot].colour = 'orange';
 
-        if (action.selectedIndex != null) {
-          this.arrService.numbers[action.selectedIndex].colour = this.arrService.$selectedIndex;
+        if (action.isSwapping == false) {
+          this.arrService.numbers[action.leftIndex].colour = this.arrService.$selectedIndex;
+          this.arrService.numbers[action.rightIndex].colour = this.arrService.$selectedIndex;
         }
         else {
           this.arrService.numbers[action.leftIndex].colour = this.arrService.$swappedIndex;
@@ -85,5 +88,5 @@ interface animationValues {
   leftIndex: number;
   rightIndex: number;
   pivot: number;
-  selectedIndex: number;
+  isSwapping: boolean;
 }

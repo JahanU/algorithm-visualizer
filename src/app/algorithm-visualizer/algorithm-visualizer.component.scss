@@ -4,25 +4,26 @@ button {
 }
 
 hr {
-  margin: 10px 0px 0px 0px;
-}
-
-.array-container {
-  text-align: center;
+  margin: 0px 0px 0px 0px;
 }
 
 table {
   margin: auto;
 }
 
-.array-body {
-  display: inline-block;
+.array-container {
+  text-align: center;
 }
 
-.array-element {
-  width: 7px;
-  margin: 0px 3px 0px 1px;
+.array-body {
   display: inline-block;
+  text-align: center;
+}
+
+.array-bar {
+  margin: 0px 1px 0px 1px;
+  display: inline-block;
+  color: #0f5257;
 }
 
 .rectangle {
@@ -41,6 +42,6 @@ table {
   margin-top: 16px;
 }
 
-.animation-bar {
+.animation-slide-bar {
   display: inline-block;
 }

@@ -85,7 +85,7 @@
 
     <div class="array-container col-12">
       
-      <div class="animation-bar col-sm-6">
+      <div class="animation-slide-bar col-sm-6">
 
         <table id="colorMeaning" class="array-container">
           <tr>
@@ -106,17 +106,16 @@
       </div>
 
       <hr />
-      <p class="array-body" *ngFor="let num of arrService.numbers">
-        <span
-          class="array-element"
-          [ngStyle]="{
+
+      <div class="array-body" *ngFor="let num of arrService.numbers"
+          class="array-bar"
+          [ngStyle]="  
+          { 'width.px': num.width,
             'height.px': num.value,
             'background-color': num.colour
-          }"
-        >
-          .</span
-        >
-      </p>
+          }">.
+      </div>
+      
     </div>
   </div>
 </div>
