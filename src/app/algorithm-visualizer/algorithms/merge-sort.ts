@@ -47,11 +47,11 @@ export class MergeSort {
   mergeSortAnimation(): void {
     this.arrService.sortingAnimationsMax = this.animations.length;
     let timer = setInterval(() => {
+
       const action: animationValues = this.animations.shift();
       this.arrService.sortingAnimationsLeft = this.animations.length;
       if (action) {
         this.arrService.numbers.map((num) => (num.colour = this.arrService.$primaryBars));
-        console.log(action);
         if (action.outerIndex == null) {
           this.arrService.numbers[action.index].colour = this.arrService.$selectedIndex;
         }
@@ -59,7 +59,6 @@ export class MergeSort {
           this.arrService.numbers[action.index].colour = this.arrService.$swappedIndex;
           this.arrService.numbers[action.outerIndex].colour = this.arrService.$swappedIndex;
           this.arrService.numbers[action.index] = action.value;
-
         }
       }
       else {
@@ -69,6 +68,7 @@ export class MergeSort {
           this.arrService.sorting = false;
         }
       }
+
     }, this.arrService.animationSpeed);
   }
 }

@@ -1,3 +1,4 @@
+// HTML Elements
 button {
   margin: 14px;
   padding: 4px 8px 4px 8px;
@@ -11,19 +12,18 @@ table {
   margin: auto;
 }
 
+// Classes
 .array-container {
   text-align: center;
 }
 
 .array-body {
-  display: inline-block;
   text-align: center;
 }
 
 .array-bar {
   margin: 0px 1px 0px 1px;
   display: inline-block;
-  color: #0f5257;
 }
 
 .rectangle {
@@ -34,6 +34,7 @@ table {
   display: inline-block;
 }
 
+// Mat related
 .mat-form-field.mat-select {
   background: #fff;
 }
@@ -43,5 +44,9 @@ table {
 }
 
 .animation-slide-bar {
+  display: inline-block;
+}
+
+mat-toolbar {
   display: inline-block;
 }

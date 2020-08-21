@@ -7,20 +7,22 @@ import { ArrayBars } from '../models/ArrayBars';
 export class ArraysService {
 
   public arrayLength: number = 10;
-  public animationSpeed: number = 1000;
+  public animationSpeed: number = 0;
   public barWidth: number = 32;
+  numbers: ArrayBars[];
 
   sortingAnimationsMax: number; // Max animations left
   sortingAnimationsLeft: number;
+
   sorting: boolean = false;
   isSorted: boolean = false;
+  isPaused: boolean = false;
 
   $primaryBars: string = '#0F5257';
   $selectedIndex: string = 'red';
   $swappedIndex: string = 'green';
   $finishedBars: string = '#9C92A3';
 
-  numbers: ArrayBars[];
 
   completedAnimation = []; // Iterating the array once last time, to show it is completed
 

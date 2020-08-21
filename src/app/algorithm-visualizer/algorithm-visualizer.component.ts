@@ -35,7 +35,6 @@ export class AlgorithmVisualizerComponent implements OnInit {
     this.arrService.resetArray();
   }
 
-
   pitchSize(event: any): void {
     this.arrService.arrayLength = event.value;
     this.arrService.sortingAnimationsMax = event.value;
@@ -56,7 +55,7 @@ export class AlgorithmVisualizerComponent implements OnInit {
     if (arrSize >= 90 && arrSize < 120) return this.arrService.barWidth = 5;
     if (arrSize >= 120 && arrSize < 150) return this.arrService.barWidth = 4;
     if (arrSize >= 150 && arrSize < 180) return this.arrService.barWidth = 3;
-    if (arrSize >= 180) return this.arrService.barWidth = 2;
+    if (arrSize >= 190) return this.arrService.barWidth = 2;
   }
 
   pitchSpeed(event: any): void {
@@ -75,7 +74,11 @@ export class AlgorithmVisualizerComponent implements OnInit {
     this.selectedAlgorithm = pickedAlgo;
   }
 
-  startSorting(): void { // Hashmap?
+  pauseAnimation() {
+    this.arrService.isPaused = !this.arrService.isPaused;
+  }
+
+  startSorting(): void {
     this.arrService.sorting = true;
     if (this.selectedAlgorithm === this.algorithmEnum.BUBBLE) { this.bubbleSort(); }
     if (this.selectedAlgorithm === this.algorithmEnum.INSERTION) { this.insertionSort(); }

@@ -1,15 +1,16 @@
-<mat-toolbar>
+<mat-toolbar class="array-container">
   <button type="button" [disabled]="arrService.sorting" class="btn btn-primary" (click)="resetArray()">
     Generate New Array
   </button>
   
   <div class="btn-group" dropdown [insideClick]="true">
-    <button
+    <button 
       id="button-animated"
       dropdownToggle
       type="button"
       class="btn btn-primary dropdown-toggle"
       aria-controls="dropdown-animated"
+      [disabled]="arrService.sorting" 
     >
       {{ selectedAlgorithm }} <span class="caret"></span>
     </button>
@@ -19,6 +20,7 @@
       class="dropdown-menu"
       role="menu"
       aria-labelledby="button-animated"
+      [disabled]="arrService.sorting" 
     >
       <li role="menuitem">
         <a
@@ -52,12 +54,12 @@
     </ul>
   </div>
 
-  <button type="button" [disabled]="arrService.sorting || arrService.isSorted" class="btn btn-danger" (click)="startSorting()">
-    Sort
+  <button type="button" class="btn btn-danger" (click)="startSorting()" [disabled]="arrService.isSorted || arrService.sorting"> Sort
   </button>
 
   <small>Array Size</small>
   <mat-slider
+    [disabled]="arrService.sorting"
     thumbLabel
     tickInterval="auto"
     min="4"
@@ -68,6 +70,7 @@
 
   <small>Iteration Speed </small>
   <mat-slider
+    [disabled]="arrService.sorting"
     id="speedSlider"
     thumbLabel
     tickInterval="auto"
@@ -91,7 +94,7 @@
           <tr>
             <td> <div class="rectangle"  [ngStyle]="{'background-color': 'red'}"> </div> </td>
             <td>{{algorithmEnum.RED_BAR}} </td> 
-            <td  *ngIf="selectedAlgorithm == algorithmEnum.QUICK"> <div class="rectangle"  [ngStyle]="{'background-color': 'orange'}"> </div> </td>
+            <td  *ngIf="selectedAlgorithm == algorithmEnum.QUICK"> <div class="rectangle" [ngStyle]="{'background-color': 'orange'}">  </div> </td>
             <td  *ngIf="selectedAlgorithm == algorithmEnum.QUICK">{{algorithmEnum.ORANGE_BAR}} </td> 
             <td> <div class="rectangle"  [ngStyle]="{'background-color': 'green'}"> </div> </td>
             <td>{{algorithmEnum.GREEN_BAR}} </td> 
@@ -101,7 +104,8 @@
         </table>
         
         <div class="mb-2">
-          <progressbar max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" type="primary" [striped]="true" [animate]="true"><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}}</i></progressbar>
+          <progressbar type="primary" [striped]="true" [animate]="true" *ngIf="arrService.sorting == false" [value]="arrService.arrayLength" ><i>{{arrService.arrayLength}} / 200 </i></progressbar>
+          <progressbar type="danger" [striped]="true" [animate]="true" *ngIf="arrService.sorting" max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft" ><i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}} </i></progressbar>
         </div>
       </div>
 
@@ -113,11 +117,12 @@
           { 'width.px': num.width,
             'height.px': num.value,
             'background-color': num.colour
-          }">.
-      </div>
-      
+          }">
+
+          <p *ngIf="arrService.arrayLength > 20" [style.font-size.px]="'0'">.</p>
+
+          <p *ngIf="arrService.arrayLength < 20" [style.color]="'white'">{{ num.value }}</p>
+        </div>      
     </div>
   </div>
 </div>
-
-
