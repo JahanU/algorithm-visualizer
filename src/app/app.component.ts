@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'algorithm-visualizer';
+
+  constructor() { }
+
+  test() {
+    alert('hello');
+    console.log('wwwww');
+  }
 }
+
