@@ -60,7 +60,7 @@ export class AlgorithmVisualizerComponent implements OnInit {
     this.arrService.animationSpeed = event.value;
   }
 
-  formatLabel(value: number) {
+  formatLabel(value: number): string {
     value /= 1000;
     if (value.toString().length > 1)
       return value.toString().substring(0, 4) + 's';
@@ -68,7 +68,7 @@ export class AlgorithmVisualizerComponent implements OnInit {
   }
 
 
-  displayInfo(pickedAlgo: algorithmEnums) {
+  displayInfo(pickedAlgo: algorithmEnums): void {
     this.selectedAlgorithm = pickedAlgo;
   }
 
