@@ -37,8 +37,6 @@ export class AlgorithmVisualizerComponent implements OnInit {
 
   pitchSize(event: any): void {
     this.arrService.arrayLength = event.value;
-    this.arrService.sortingAnimationsMax = event.value;
-    this.arrService.sortingAnimationsLeft = event.value;
     this.setBarWidth();
     this.arrService.resetArray();
   }
@@ -74,9 +72,6 @@ export class AlgorithmVisualizerComponent implements OnInit {
     this.selectedAlgorithm = pickedAlgo;
   }
 
-  pauseAnimation() {
-    this.arrService.isPaused = !this.arrService.isPaused;
-  }
 
   startSorting(): void {
     this.arrService.sorting = true;

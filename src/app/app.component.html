@@ -1,12 +1,15 @@
 <div class="row">
-    <div class="col-2">
-        <nav class="nav flex-column">
-            <a class="nav-link active" href="#">Sorting Algorithms</a>
-            <a class="nav-link" href="#">Searching Algorithms</a>
-            <a class="nav-link" href="#">Binary Trees</a>
-        </nav>
-    </div>
-    <div class="col-10">
-        <app-algorithm-visualizer></app-algorithm-visualizer>
-    </div>
+  <div class="col-2">
+    <nav class="nav flex-column">
+      <!-- Href requires a fresh reload, routerlink treats it as an internal route -->
+      <!-- <a class="nav-link active" href="algo">Sorting Algorithms</a> -->
+      <a class="nav-link" routerLink="/algorithm">Sorting Algorithms</a>
+      <a class="nav-link" routerLink="/searching">Searching Algorithms</a>
+      <a class="nav-link" routerLink="/algorithm">Binary Trees</a>
+
+    </nav>
+  </div>
+  <div class="col-10">
+    <router-outlet></router-outlet>
+  </div>
 </div>

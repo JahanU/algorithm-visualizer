@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
@@ -15,7 +14,6 @@ body {
   margin: 8px;
 }
 
-// HTML Elements
 button {
   margin: 14px;
   padding: 4px 8px 4px 8px;
@@ -29,7 +27,6 @@ table {
   margin: auto;
 }
 
-// Classes
 .array-container {
   text-align: center;
 }
@@ -51,7 +48,6 @@ table {
   display: inline-block;
 }
 
-// Mat related
 .mat-form-field.mat-select {
   background: #fff;
 }
@@ -67,8 +63,6 @@ table {
 mat-toolbar {
   display: inline-block;
 }
-
-
 
 #speedSlider .mat-slider-thumb-label {
   padding: 18px;

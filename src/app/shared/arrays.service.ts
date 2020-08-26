@@ -30,7 +30,6 @@ export class ArraysService {
 
   resetArray(): void {
     this.numbers = [];
-    console.log('bar width: ', this.barWidth);
     for (let i = 0; i < this.arrayLength; i++) {
       const randInt = this.randomInteger(20, 200);
       this.numbers.push({ value: randInt, colour: this.$primaryBars, width: this.barWidth });
@@ -48,6 +47,10 @@ export class ArraysService {
     const temp = arr[left];
     arr[left] = arr[right];
     arr[right] = temp;
+  }
+
+  sortArray() {
+    this.numbers.sort((a, b) => a.value - b.value);
   }
 
   isArraySorted(array: ArrayBars[]): boolean {

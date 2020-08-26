@@ -11,16 +11,10 @@
     <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
       [disabled]="arrService.sorting">
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.BUBBLE)">Bubble Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.BINARY)">Binary Search</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.INSERTION)">Insertion Sort</a>
-      </li>
-      <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.MERGE)">Merge Sort</a>
-      </li>
-      <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.QUICK)">Quick Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.LINEAR)">Linear Search</a>
       </li>
     </ul>
   </div>
@@ -47,41 +41,35 @@
 
       <div class="animation-slide-bar col-sm-6">
 
-        <table id="colorMeaning" class="array-container">
+        <table class="array-container">
           <tr>
             <td>
               <div class="rectangle" [ngStyle]="{'background-color': 'red'}"> </div>
             </td>
             <td>{{algorithmEnum.RED_BAR}} </td>
-            <td *ngIf="selectedAlgorithm == algorithmEnum.QUICK">
-              <div class="rectangle" [ngStyle]="{'background-color': 'orange'}"> </div>
-            </td>
-            <td *ngIf="selectedAlgorithm == algorithmEnum.QUICK">{{algorithmEnum.ORANGE_BAR}} </td>
-            <td>
-              <div class="rectangle" [ngStyle]="{'background-color': 'green'}"> </div>
-            </td>
-            <td>{{algorithmEnum.GREEN_BAR}} </td>
+
           </tr>
           <tr>
           </tr>
         </table>
 
-        <div class="mb-2">
+        <!-- <div class="mb-2">
           <progressbar type="primary" [striped]="true" [animate]="true" *ngIf="arrService.sorting == false"
             [value]="arrService.arrayLength"><i>{{arrService.arrayLength}} / 200 </i></progressbar>
           <progressbar type="danger" [striped]="true" [animate]="true" *ngIf="arrService.sorting"
             max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft">
-            <i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}} </i></progressbar>
-        </div>
+            <i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}} </i>
+          </progressbar>
+        </div> -->
       </div>
 
       <hr />
 
       <div class="array-body" *ngFor="let num of arrService.numbers" class="array-bar" [ngStyle]="  
-          { 'width.px': num.width,
-            'height.px': num.value,
-            'background-color': num.colour
-          }">
+            { 'width.px': num.width,
+              'height.px': num.value,
+              'background-color': num.colour
+            }">
 
         <p *ngIf="arrService.arrayLength > 20" [style.font-size.px]="'0'">.</p>
 

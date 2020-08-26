@@ -9,9 +9,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatSliderModule } from '@angular/material/slider';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { RouterModule, Routes } from '@angular/router';
+import { SearchingAlgorithmsComponent } from './searching-algorithms/searching-algorithms.component'
+
+const routes: Routes = [
+  { path: 'algorithm', component: AlgorithmVisualizerComponent },
+  { path: 'searching', component: SearchingAlgorithmsComponent },
+
+  { path: '', redirectTo: '/searching', pathMatch: 'full' },
+]
 
 @NgModule({
-  declarations: [AppComponent, AlgorithmVisualizerComponent],
+  declarations: [AppComponent, AlgorithmVisualizerComponent, SearchingAlgorithmsComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,
@@ -21,8 +30,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
-
-
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent],

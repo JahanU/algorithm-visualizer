@@ -18,13 +18,19 @@ var select_1 = require("@angular/material/select");
 var dropdown_1 = require("ngx-bootstrap/dropdown");
 var slider_1 = require("@angular/material/slider");
 var progressbar_1 = require("ngx-bootstrap/progressbar");
-var tabs_1 = require("ngx-bootstrap/tabs");
+var router_1 = require("@angular/router");
+var searching_algorithms_component_1 = require("./searching-algorithms/searching-algorithms.component");
+var routes = [
+    { path: 'algorithm', component: algorithm_visualizer_component_1.AlgorithmVisualizerComponent },
+    { path: 'searching', component: searching_algorithms_component_1.SearchingAlgorithmsComponent },
+    { path: '', redirectTo: '/searching', pathMatch: 'full' },
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            declarations: [app_component_1.AppComponent, algorithm_visualizer_component_1.AlgorithmVisualizerComponent],
+            declarations: [app_component_1.AppComponent, algorithm_visualizer_component_1.AlgorithmVisualizerComponent, searching_algorithms_component_1.SearchingAlgorithmsComponent],
             imports: [
                 platform_browser_1.BrowserModule,
                 toolbar_1.MatToolbarModule,
@@ -34,7 +40,7 @@ var AppModule = /** @class */ (function () {
                 animations_1.BrowserAnimationsModule,
                 dropdown_1.BsDropdownModule.forRoot(),
                 progressbar_1.ProgressbarModule.forRoot(),
-                tabs_1.TabsModule.forRoot(),
+                router_1.RouterModule.forRoot(routes),
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
