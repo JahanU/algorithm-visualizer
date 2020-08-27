@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArraysService } from '../shared/arrays.service';
 import { algorithmEnums } from '../shared/algorithm-enum';
 import { LinearSearch } from './algorithms/linear-search';
+import { BinarySearch } from './algorithms/binary-search';
 
 @Component({
   selector: 'app-searching-algorithms',
@@ -11,7 +12,7 @@ import { LinearSearch } from './algorithms/linear-search';
 export class SearchingAlgorithmsComponent implements OnInit {
 
   algorithmEnum = algorithmEnums;
-  selectedAlgorithm: algorithmEnums = algorithmEnums.LINEAR;
+  selectedAlgorithm: algorithmEnums = algorithmEnums.BINARY;
   targetIndex = 0;
 
   constructor(public arrService: ArraysService) { }
@@ -55,7 +56,7 @@ export class SearchingAlgorithmsComponent implements OnInit {
     this.arrService.animationSpeed = event.value;
   }
 
-  formatLabel(value: number): String {
+  formatLabel(value: number): string {
     value /= 1000;
     if (value.toString().length > 1)
       return value.toString().substring(0, 4) + 's';
@@ -70,7 +71,7 @@ export class SearchingAlgorithmsComponent implements OnInit {
   startSorting(): void {
     this.arrService.sorting = true;
     if (this.selectedAlgorithm === this.algorithmEnum.LINEAR) { this.linearSearch(); }
-
+    if (this.selectedAlgorithm === this.algorithmEnum.BINARY) { this.binarySearch(); }
   }
 
   getRandomElement(): number {
@@ -80,10 +81,16 @@ export class SearchingAlgorithmsComponent implements OnInit {
   }
 
   linearSearch(): void {
-    let ls = new LinearSearch(this.arrService);
+    const ls = new LinearSearch(this.arrService);
     const numbersCopy = [...this.arrService.numbers];
     ls.linearSearch(numbersCopy, numbersCopy[this.targetIndex].value);
     ls.linearSearchAnimation();
   }
 
+  binarySearch(): void {
+    const bs = new BinarySearch(this.arrService);
+    const numbersCopy = [...this.arrService.numbers];
+    bs.binarySearch(numbersCopy, numbersCopy[this.targetIndex].value);
+    bs.binarySearchAnimation();
+  }
 }

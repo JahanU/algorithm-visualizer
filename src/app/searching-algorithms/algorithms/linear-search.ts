@@ -1,13 +1,11 @@
-import { ArrayBars } from '../../models/ArrayBars';
+import { ArrayBars } from '../../shared/models/ArrayBars';
 import { ArraysService } from '../../shared/arrays.service';
 
 export class LinearSearch {
 
-
     animations: animationValues[] = [];
 
     constructor(private readonly arrService: ArraysService) { }
-
 
     // linear searching
     linearSearch(arr: ArrayBars[], target: number) {

@@ -1,5 +1,5 @@
 import { ArraysService } from 'src/app/shared/arrays.service';
-import { ArrayBars } from 'src/app/models/ArrayBars';
+import { ArrayBars } from 'src/app/shared/models/ArrayBars';
 
 export class InsertionSort {
   animations: animationValues[] = [];

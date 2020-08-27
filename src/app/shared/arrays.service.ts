@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ArrayBars } from '../models/ArrayBars';
+import { ArrayBars } from '../shared/models/ArrayBars';
 
 @Injectable({
   providedIn: 'root',

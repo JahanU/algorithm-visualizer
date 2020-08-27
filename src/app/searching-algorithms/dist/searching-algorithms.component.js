@@ -17,11 +17,12 @@ exports.SearchingAlgorithmsComponent = void 0;
 var core_1 = require("@angular/core");
 var algorithm_enum_1 = require("../shared/algorithm-enum");
 var linear_search_1 = require("./algorithms/linear-search");
+var binary_search_1 = require("./algorithms/binary-search");
 var SearchingAlgorithmsComponent = /** @class */ (function () {
     function SearchingAlgorithmsComponent(arrService) {
         this.arrService = arrService;
         this.algorithmEnum = algorithm_enum_1.algorithmEnums;
-        this.selectedAlgorithm = algorithm_enum_1.algorithmEnums.LINEAR;
+        this.selectedAlgorithm = algorithm_enum_1.algorithmEnums.BINARY;
         this.targetIndex = 0;
     }
     SearchingAlgorithmsComponent.prototype.ngOnInit = function () {
@@ -85,6 +86,9 @@ var SearchingAlgorithmsComponent = /** @class */ (function () {
         if (this.selectedAlgorithm === this.algorithmEnum.LINEAR) {
             this.linearSearch();
         }
+        if (this.selectedAlgorithm === this.algorithmEnum.BINARY) {
+            this.binarySearch();
+        }
     };
     SearchingAlgorithmsComponent.prototype.getRandomElement = function () {
         var min = 20;
@@ -96,6 +100,12 @@ var SearchingAlgorithmsComponent = /** @class */ (function () {
         var numbersCopy = __spreadArrays(this.arrService.numbers);
         ls.linearSearch(numbersCopy, numbersCopy[this.targetIndex].value);
         ls.linearSearchAnimation();
+    };
+    SearchingAlgorithmsComponent.prototype.binarySearch = function () {
+        var bs = new binary_search_1.BinarySearch(this.arrService);
+        var numbersCopy = __spreadArrays(this.arrService.numbers);
+        bs.binarySearch(numbersCopy, numbersCopy[this.targetIndex].value);
+        bs.binarySearchAnimation();
     };
     SearchingAlgorithmsComponent = __decorate([
         core_1.Component({

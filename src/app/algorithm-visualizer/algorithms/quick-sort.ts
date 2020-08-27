@@ -1,7 +1,8 @@
 import { ArraysService } from '../../shared/arrays.service';
-import { ArrayBars } from '../../models/ArrayBars';
+import { ArrayBars } from 'src/app/shared/models/ArrayBars';
 
 export class QuickSort {
+
   animations: animationValues[] = [];
 
   constructor(private readonly arrService: ArraysService) { }

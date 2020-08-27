@@ -7,7 +7,7 @@ import { InsertionSort } from './algorithms/insertion-sort';
 import { ArraysService } from '../shared/arrays.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { algorithmEnums } from '../shared/algorithm-enum';
-import { ArrayBars } from '../models/ArrayBars';
+import { ArrayBars } from '../shared/models/ArrayBars';
 
 @Component({
   selector: 'app-algorithm-visualizer',
