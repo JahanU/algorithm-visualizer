@@ -10,9 +10,5 @@ export class AppComponent {
 
   constructor() { }
 
-  test() {
-    alert('hello');
-    console.log('wwwww');
-  }
 }
 

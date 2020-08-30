@@ -10,17 +10,19 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatSliderModule } from '@angular/material/slider';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchingAlgorithmsComponent } from './searching-algorithms/searching-algorithms.component'
+import { SearchingAlgorithmsComponent } from './searching-algorithms/searching-algorithms.component';
+import { BinaryTreeComponent } from './binary-tree/binary-tree.component';
 
 const routes: Routes = [
   { path: 'algorithm', component: AlgorithmVisualizerComponent },
   { path: 'searching', component: SearchingAlgorithmsComponent },
+  { path: 'binary', component: BinaryTreeComponent },
 
   { path: '', redirectTo: '/algorithm', pathMatch: 'full' },
 ]
 
 @NgModule({
-  declarations: [AppComponent, AlgorithmVisualizerComponent, SearchingAlgorithmsComponent],
+  declarations: [AppComponent, AlgorithmVisualizerComponent, SearchingAlgorithmsComponent, BinaryTreeComponent],
   imports: [
     BrowserModule,
     MatToolbarModule,

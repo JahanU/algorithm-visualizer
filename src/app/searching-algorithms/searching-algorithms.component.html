@@ -29,7 +29,8 @@
 
   <small>Iteration Speed </small>
   <mat-slider [disabled]="arrService.sorting" id="speedSlider" thumbLabel tickInterval="auto"
-    [displayWith]="formatLabel" min="0" max="1000" (input)="pitchSpeed($event)" value="{{ arrService.animationSpeed }}">
+    [displayWith]="arrService.formatLabel" min="0" max="1000" (input)="pitchSpeed($event)"
+    value="{{ arrService.animationSpeed }}">
   </mat-slider>
 </mat-toolbar>
 
