@@ -19,12 +19,13 @@ export class ArraysService {
   isPaused: boolean = false;
 
   $primaryBars: string = '#0F5257';
+  $finishedBars: string = '#9C92A3';
   $selectedIndex: string = 'red';
   $swappedIndex: string = 'green';
-  $finishedBars: string = '#9C92A3';
+  $targetIndex: string = 'orange';
 
 
-  completedAnimation = []; // Iterating the array once last time, to show it is completed
+  completedAnimation: AnimationValues[] = []; // Iterating the array once last time, to show it is completed
 
   constructor() { }
 
@@ -38,6 +39,22 @@ export class ArraysService {
     this.isSorted = this.sorting = false;
   }
 
+
+  resetArrayNoDups(): void {
+    this.numbers = [];
+    let i = 0;
+    while (i < this.arrayLength) {
+      const randInt = this.randomInteger(20, 200);
+      const foundDuplicates = this.numbers.filter((row) => row.value === randInt);
+      if (foundDuplicates.length > 0) continue;
+      this.numbers.push({ value: randInt, colour: this.$primaryBars, width: this.barWidth });
+      i++;
+    }
+    this.sortingAnimationsMax = this.sortingAnimationsLeft = this.numbers.length;
+    this.isSorted = this.sorting = false;
+  }
+
+
   randomInteger(min, max): number {
     //https://stackoverflow.com/questions/4959975/generate-random-number-between-two-numbers-in-javascript
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -49,7 +66,7 @@ export class ArraysService {
     arr[right] = temp;
   }
 
-  sortArray() {
+  sortArray(): void {
     this.numbers.sort((a, b) => a.value - b.value);
   }
 
@@ -67,7 +84,7 @@ export class ArraysService {
 
   animateSortedArray(): void {
     const timer = setInterval(() => {
-      const action: animationValues = this.completedAnimation.shift();
+      const action: AnimationValues = this.completedAnimation.shift();
       if (action) {
         this.numbers[action.index].colour = this.$finishedBars;
       } else {
@@ -77,6 +94,6 @@ export class ArraysService {
   }
 }
 
-interface animationValues {
+interface AnimationValues {
   index: number;
 }

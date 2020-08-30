@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'algorithm', component: AlgorithmVisualizerComponent },
   { path: 'searching', component: SearchingAlgorithmsComponent },
 
-  { path: '', redirectTo: '/searching', pathMatch: 'full' },
+  { path: '', redirectTo: '/algorithm', pathMatch: 'full' },
 ]
 
 @NgModule({

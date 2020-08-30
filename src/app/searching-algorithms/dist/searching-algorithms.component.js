@@ -26,16 +26,16 @@ var SearchingAlgorithmsComponent = /** @class */ (function () {
         this.targetIndex = 0;
     }
     SearchingAlgorithmsComponent.prototype.ngOnInit = function () {
-        this.arrService.resetArray();
+        this.arrService.resetArrayNoDups();
         this.arrService.sortArray();
         this.targetIndex = this.getRandomElement();
-        this.arrService.numbers[this.targetIndex].colour = this.arrService.$swappedIndex;
+        this.arrService.numbers[this.targetIndex].colour = this.arrService.$targetIndex;
     };
     SearchingAlgorithmsComponent.prototype.resetArray = function () {
-        this.arrService.resetArray();
+        this.arrService.resetArrayNoDups();
         this.arrService.sortArray();
         this.targetIndex = this.getRandomElement();
-        this.arrService.numbers[this.targetIndex].colour = this.arrService.$swappedIndex;
+        this.arrService.numbers[this.targetIndex].colour = this.arrService.$targetIndex;
     };
     SearchingAlgorithmsComponent.prototype.pitchSize = function (event) {
         this.arrService.arrayLength = event.value;

@@ -18,17 +18,17 @@ export class SearchingAlgorithmsComponent implements OnInit {
   constructor(public arrService: ArraysService) { }
 
   ngOnInit(): void {
-    this.arrService.resetArray();
+    this.arrService.resetArrayNoDups();
     this.arrService.sortArray();
     this.targetIndex = this.getRandomElement();
-    this.arrService.numbers[this.targetIndex].colour = this.arrService.$swappedIndex;
+    this.arrService.numbers[this.targetIndex].colour = this.arrService.$targetIndex;
   }
 
   resetArray(): void {
-    this.arrService.resetArray();
+    this.arrService.resetArrayNoDups();
     this.arrService.sortArray();
     this.targetIndex = this.getRandomElement();
-    this.arrService.numbers[this.targetIndex].colour = this.arrService.$swappedIndex;
+    this.arrService.numbers[this.targetIndex].colour = this.arrService.$targetIndex;
   }
 
   pitchSize(event: any): void {
@@ -36,8 +36,8 @@ export class SearchingAlgorithmsComponent implements OnInit {
     this.setBarWidth();
     this.resetArray();
   }
-  setBarWidth() {
-    const arrSize = this.arrService.arrayLength
+  setBarWidth(): number {
+    const arrSize = this.arrService.arrayLength;
     if (arrSize < 20) return this.arrService.barWidth = 32;
     if (arrSize >= 20 && arrSize < 30) return this.arrService.barWidth = 22;
     if (arrSize >= 30 && arrSize < 40) return this.arrService.barWidth = 18;

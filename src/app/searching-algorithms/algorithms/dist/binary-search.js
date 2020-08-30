@@ -26,6 +26,7 @@ var BinarySearch = /** @class */ (function () {
                 right = mid - 1;
             }
         }
+        console.log('cannot find target');
         return -1; // Cannot find target
     };
     BinarySearch.prototype.getIndexRange = function (left, right) {
@@ -39,6 +40,7 @@ var BinarySearch = /** @class */ (function () {
         this.arrService.sortingAnimationsMax = this.animations.length;
         var timer = setInterval(function () {
             var action = _this.animations.shift();
+            _this.arrService.sortingAnimationsLeft = _this.animations.length;
             if (action) {
                 if (action.selectedIndex && _this.animations.length === 0) // Last index, animation is finished
                     _this.arrService.numbers[action.selectedIndex].colour = _this.arrService.$finishedBars;

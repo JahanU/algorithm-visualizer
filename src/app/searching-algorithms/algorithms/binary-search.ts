@@ -32,7 +32,7 @@ export class BinarySearch {
                 right = mid - 1;
             }
         }
-
+        console.log('cannot find target');
         return -1; // Cannot find target
     }
 
@@ -47,6 +47,7 @@ export class BinarySearch {
         this.arrService.sortingAnimationsMax = this.animations.length;
         const timer = setInterval(() => {
             const action = this.animations.shift();
+            this.arrService.sortingAnimationsLeft = this.animations.length;
             if (action) {
                 if (action.selectedIndex && this.animations.length === 0) // Last index, animation is finished
                     this.arrService.numbers[action.selectedIndex].colour = this.arrService.$finishedBars;

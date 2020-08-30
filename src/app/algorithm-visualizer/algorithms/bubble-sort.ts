@@ -3,7 +3,7 @@ import { ArrayBars } from 'src/app/shared/models/ArrayBars';
 
 export class BubbleSort {
 
-  animations: animationValues[] = [];
+  animations: AnimationValues[] = [];
 
   constructor(private readonly arrService: ArraysService) { }
 
@@ -22,7 +22,7 @@ export class BubbleSort {
   bubbleSortAnimation(): void {
     this.arrService.sortingAnimationsMax = this.animations.length;
     const timer = setInterval(() => {
-      const action: animationValues = this.animations.shift();
+      const action: AnimationValues = this.animations.shift();
       this.arrService.sortingAnimationsLeft = this.animations.length;
       if (action) {
         this.arrService.numbers.map((num) => (num.colour = this.arrService.$primaryBars));
@@ -46,7 +46,7 @@ export class BubbleSort {
   }
 }
 
-interface animationValues {
+interface AnimationValues {
   leftIndex: number;
   rightIndex: number;
   index: number;

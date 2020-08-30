@@ -23,7 +23,7 @@ var searching_algorithms_component_1 = require("./searching-algorithms/searching
 var routes = [
     { path: 'algorithm', component: algorithm_visualizer_component_1.AlgorithmVisualizerComponent },
     { path: 'searching', component: searching_algorithms_component_1.SearchingAlgorithmsComponent },
-    { path: '', redirectTo: '/searching', pathMatch: 'full' },
+    { path: '', redirectTo: '/algorithm', pathMatch: 'full' },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {

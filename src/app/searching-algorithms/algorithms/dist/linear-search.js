@@ -1,12 +1,11 @@
 "use strict";
 exports.__esModule = true;
-exports.animationValues = exports.LinearSearch = void 0;
+exports.AnimationValues = exports.LinearSearch = void 0;
 var LinearSearch = /** @class */ (function () {
     function LinearSearch(arrService) {
         this.arrService = arrService;
         this.animations = [];
     }
-    // linear searching
     LinearSearch.prototype.linearSearch = function (arr, target) {
         for (var i = 0; i < arr.length; i++) {
             this.animations.push({ selectedIndex: i });
@@ -16,12 +15,12 @@ var LinearSearch = /** @class */ (function () {
             }
         }
     };
-    // linear animation
     LinearSearch.prototype.linearSearchAnimation = function () {
         var _this = this;
         this.arrService.sortingAnimationsMax = this.animations.length;
         var timer = setInterval(function () {
             var action = _this.animations.shift();
+            _this.arrService.sortingAnimationsLeft = _this.animations.length;
             if (action) {
                 _this.arrService.numbers[action.selectedIndex].colour = _this.arrService.$selectedIndex;
             }
@@ -36,9 +35,9 @@ var LinearSearch = /** @class */ (function () {
     return LinearSearch;
 }());
 exports.LinearSearch = LinearSearch;
-var animationValues = /** @class */ (function () {
-    function animationValues() {
+var AnimationValues = /** @class */ (function () {
+    function AnimationValues() {
     }
-    return animationValues;
+    return AnimationValues;
 }());
-exports.animationValues = animationValues;
+exports.AnimationValues = AnimationValues;

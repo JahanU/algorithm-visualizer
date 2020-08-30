@@ -53,14 +53,14 @@
           </tr>
         </table>
 
-        <!-- <div class="mb-2">
+        <div class="mb-2">
           <progressbar type="primary" [striped]="true" [animate]="true" *ngIf="arrService.sorting == false"
             [value]="arrService.arrayLength"><i>{{arrService.arrayLength}} / 200 </i></progressbar>
           <progressbar type="danger" [striped]="true" [animate]="true" *ngIf="arrService.sorting"
             max="{{arrService.sortingAnimationsMax}}" [value]="arrService.sortingAnimationsLeft">
             <i>{{arrService.sortingAnimationsLeft}} / {{arrService.sortingAnimationsMax}} </i>
           </progressbar>
-        </div> -->
+        </div>
       </div>
 
       <hr />
@@ -71,7 +71,7 @@
               'background-color': num.colour
             }">
 
-        <p *ngIf="arrService.arrayLength > 20" [style.font-size.px]="'0'">.</p>
+        <p *ngIf="arrService.arrayLength >= 20" [style.font-size.px]="'0'">.</p>
 
         <p *ngIf="arrService.arrayLength < 20" [style.color]="'white'">{{ num.value }}</p>
       </div>

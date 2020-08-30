@@ -17,9 +17,10 @@ var ArraysService = /** @class */ (function () {
         this.isSorted = false;
         this.isPaused = false;
         this.$primaryBars = '#0F5257';
+        this.$finishedBars = '#9C92A3';
         this.$selectedIndex = 'red';
         this.$swappedIndex = 'green';
-        this.$finishedBars = '#9C92A3';
+        this.$targetIndex = 'orange';
         this.completedAnimation = []; // Iterating the array once last time, to show it is completed
     }
     ArraysService.prototype.resetArray = function () {
@@ -27,6 +28,24 @@ var ArraysService = /** @class */ (function () {
         for (var i = 0; i < this.arrayLength; i++) {
             var randInt = this.randomInteger(20, 200);
             this.numbers.push({ value: randInt, colour: this.$primaryBars, width: this.barWidth });
+        }
+        this.sortingAnimationsMax = this.sortingAnimationsLeft = this.numbers.length;
+        this.isSorted = this.sorting = false;
+    };
+    ArraysService.prototype.resetArrayNoDups = function () {
+        this.numbers = [];
+        var i = 0;
+        var _loop_1 = function () {
+            var randInt = this_1.randomInteger(20, 200);
+            var foundDuplicates = this_1.numbers.filter(function (row) { return row.value === randInt; });
+            if (foundDuplicates.length > 0)
+                return "continue";
+            this_1.numbers.push({ value: randInt, colour: this_1.$primaryBars, width: this_1.barWidth });
+            i++;
+        };
+        var this_1 = this;
+        while (i < this.arrayLength) {
+            _loop_1();
         }
         this.sortingAnimationsMax = this.sortingAnimationsLeft = this.numbers.length;
         this.isSorted = this.sorting = false;

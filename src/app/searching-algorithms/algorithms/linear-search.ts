@@ -3,12 +3,11 @@ import { ArraysService } from '../../shared/arrays.service';
 
 export class LinearSearch {
 
-    animations: animationValues[] = [];
+    animations: AnimationValues[] = [];
 
     constructor(private readonly arrService: ArraysService) { }
 
-    // linear searching
-    linearSearch(arr: ArrayBars[], target: number) {
+    linearSearch(arr: ArrayBars[], target: number): number {
         for (let i = 0; i < arr.length; i++) {
             this.animations.push({ selectedIndex: i });
             if (arr[i].value === target) {
@@ -18,11 +17,11 @@ export class LinearSearch {
         }
     }
 
-    // linear animation
-    linearSearchAnimation() {
+    linearSearchAnimation(): void {
         this.arrService.sortingAnimationsMax = this.animations.length;
         const timer = setInterval(() => {
-            let action = this.animations.shift();
+            const action = this.animations.shift();
+            this.arrService.sortingAnimationsLeft = this.animations.length;
             if (action) {
                 this.arrService.numbers[action.selectedIndex].colour = this.arrService.$selectedIndex;
             }
@@ -36,6 +35,6 @@ export class LinearSearch {
     }
 }
 
-export class animationValues {
+export class AnimationValues {
     selectedIndex: number;
 }
