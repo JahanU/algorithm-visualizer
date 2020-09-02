@@ -11,15 +11,15 @@ export class BinaryTreeService {
   preOrderArray: number[] = [];
 
   constructor() {
-    let root: TreeNode = null;
-    const res = [1, null, 2, 3, 4, 5, 6, 7];
+    // let root: TreeNode = null;
+    // const res = [1, null, 2, 3, 4, 5, 6, 7];
 
-    while (this.amount-- > 0 && res.length > 0) {
-      root = this.insert(root, res.shift());
-    }
+    // while (this.amount-- > 0 && res.length > 0) {
+    //   root = this.insert(root, res.shift());
+    // }
 
-    console.log(root);
-    this.preOrderTraversal(root);
+    // console.log(root);
+    // this.preOrderTraversal(root);
   }
 
 
