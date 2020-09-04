@@ -7,6 +7,7 @@ export class TreeNode {
     right: TreeNode;
     xAxis: number;
     yAxis: number;
+    level: number;
 
     constructor(data: number) {
         this.data = data;
@@ -14,6 +15,7 @@ export class TreeNode {
         this.right = null;
         this.xAxis = null;
         this.yAxis = null;
+        this.level = null;
     }
 
 }
