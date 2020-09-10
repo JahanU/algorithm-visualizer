@@ -1,1 +1,41 @@
+<mat-toolbar class="array-container">
+    <button type="button" class="btn btn-primary" (click)="resetArray()">
+    Generate New Array
+  </button>
+
+    <div class="btn-group" dropdown [insideClick]="true">
+        <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-animated">
+      {{ selectedAlgorithm }} <span class="caret"></span>
+    </button>
+        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem">
+                <a class="dropdown-item" (click)="displayInfo(treeEnum.PRE_ORDER)">{{treeEnum.PRE_ORDER}}</a>
+            </li>
+
+            <li role="menuitem">
+                <a class="dropdown-item" (click)="displayInfo(treeEnum.IN_ORDER)">{{treeEnum.IN_ORDER}}</a>
+            </li>
+
+            <li role="menuitem">
+                <a class="dropdown-item" (click)="displayInfo(treeEnum.POST_ORDER)">{{treeEnum.POST_ORDER}}</a>
+            </li>
+
+            <li role="menuitem">
+                <a class="dropdown-item" (click)="displayInfo(treeEnum.BFS)">{{treeEnum.BFS}}</a>
+            </li>
+
+        </ul>
+    </div>
+
+    <button type="button" class="btn btn-danger" (click)="startSorting()"> Traverse
+  </button>
+
+    <small>Array Size</small>
+    <mat-slider thumbLabel tickInterval="auto" min="4" max="200" (input)="pitchSize($event)" value="{{ binTreeService.nodeAmount }}"></mat-slider>
+
+    <small>Iteration Speed </small>
+    <mat-slider id="speedSlider" thumbLabel tickInterval="auto" min="0" max="30" (input)="pitchSpeed($event)" value="{{ binTreeService.animationSpeed }}">
+    </mat-slider>
+</mat-toolbar>
+
 <canvas #canvas width="1000" height="1000"></canvas>

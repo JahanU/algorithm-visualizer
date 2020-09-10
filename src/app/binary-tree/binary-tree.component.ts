@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from '../shared/models/TreeNode';
+import { PreOrder } from './algorithms/preorder';
+import { BinaryTreeService } from '../shared/binary-tree.service';
+import { TreeEnum } from '../shared/tree.enum';
 
 @Component({
   selector: 'app-binary-tree',
@@ -12,82 +15,77 @@ export class BinaryTreeComponent implements OnInit {
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
 
+  treeEnum = TreeEnum;
+  selectedAlgorithm: TreeEnum = TreeEnum.PRE_ORDER;
+
   nodes: TreeNode[] = [];
-  arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  preOrderArr = [];
-  map = new Map();
+  root = null;
 
-
-  constructor() { }
+  constructor(public binTreeService:  BinaryTreeService) { }
 
   ngOnInit(): void {
-
     this.ctx = this.canvas.nativeElement.getContext('2d');
-    // this.ctx.fillStyle = "yellow";
-    // this.ctx.fillRect(0, 0, 1000, 800);
+    this.clearCanvas();
+    this.initBinaryTree();
+  }
 
-    // for (let i = 0; i < 10; i++) {
-    //   this.ctx.beginPath();
-    //   this.ctx.arc((100 * i) % 1000, 100, 30, 0, 90); //CanvasPath.arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean)
-    //   this.ctx.stroke();
-    //   // this.ctx.font = "30px Arial";
-    //   // this.ctx.fillText("4", (97 * i) % 1000, 110);
-    // }
-
-    let root = this.sortedArrToBST(0, this.arr.length - 1, 0);
-    this.preOrder(root);
-
-    console.log(this.preOrderArr);
+  initBinaryTree() {
+    this.root = this.binTreeService.initTree();
+    this.createNodes(this.root);
     this.displayNodes();
-
   }
 
-  updateSurrounding() {
-
-    this.nodes.sort((a, b) => a.xAxis - b.xAxis);
-
-    for (let i = 0; i < this.nodes.length - 1; i++) {
-      if (this.nodes[i].xAxis == this.nodes[i + 1].xAxis) {
-        console.log('found matching xAxis!');
-        this.nodes[i].xAxis -= 50;
-        this.nodes[i + 1].xAxis += 50;
-      }
-    }
+  resetArray() {
+    this.clearCanvas();
+    this.binTreeService.resetArray();
+    this.initBinaryTree();
   }
+
+  displayInfo(selectedTraversal: TreeEnum) {
+
+  }
+  
+  pitchSize(event: any): void {
+    this.binTreeService.nodeAmount = event.value;
+    this.binTreeService.resetArray();
+    console.log(this.binTreeService.nodeAmount);
+  }
+
+  pitchSpeed = (event: any) => this.binTreeService.animationSpeed = event.value;
+
+  startSorting() {
+    if (this.selectedAlgorithm == TreeEnum.PRE_ORDER) this.preOrder();
+  }
+
+  preOrder() {
+    const obj = new PreOrder(this.binTreeService, this.ctx, this.canvas);
+    obj.preOrderTraversal(this.root);
+  }
+
+  //
   displayNodes() {
-
-    // this.updateSurrounding();
-
-    console.log(this.nodes);
-    for (let i = 0; i < this.nodes.length; i++) {
-      if (this.nodes[i].yAxis != null) {
+    this.binTreeService.nodes.forEach((node) => {
+        // create nodes 
         this.ctx.beginPath();
-        this.ctx.arc(this.nodes[i].xAxis, this.nodes[i].yAxis, 30, 0, 90); //CanvasPath.arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean)
+        this.ctx.lineWidth = 2;
+        this.ctx.fillStyle = node.colour;
+        // this.ctx.strokeStyle = 'blue';
+        this.ctx.arc(node.xAxis, node.yAxis, 30, 0, 90); 
         this.ctx.stroke();
+        this.ctx.fill();
+
+        // fill node data/style
         this.ctx.font = "30px Arial";
-        this.ctx.fillText(this.nodes[i].data.toString(), this.nodes[i].xAxis - 8, this.nodes[i].yAxis + 8);
-      }
+        this.ctx.fillStyle = 'black';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillText(node.data.toString(), node.xAxis, node.yAxis + 10);
+      });
     }
-  }
 
-  sortedArrToBST(start, end, level): TreeNode {
+clearCanvas = () => this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
 
-    // base case
-    if (start > end)
-      return null;
 
-    let mid = Math.floor(start + (end - start) / 2);
-    let newNode = new TreeNode(this.arr[mid]);
-    newNode.level = level;
-
-    newNode.left = this.sortedArrToBST(start, mid - 1, level + 1);
-    newNode.right = this.sortedArrToBST(mid + 1, end, level + 1);
-
-    this.nodes.push(newNode);
-    return newNode;
-  }
-
-  preOrder(root: TreeNode) {
+  createNodes(root: TreeNode) {
 
     let stack = [] // dfs
     root.xAxis = 500;
@@ -98,26 +96,32 @@ export class BinaryTreeComponent implements OnInit {
       let pop = stack.pop();
 
       if (pop != null) {
-        this.preOrderArr.push(pop.data)
-
         let xAxis = pop.level === 0 ? 200 : 100;
 
         if (pop.right) {
           pop.right.xAxis = pop.xAxis + xAxis;
           pop.right.yAxis = pop.yAxis + 75;
+          this.setLines(pop, pop.right);
         }
 
         if (pop.left) {
           pop.left.xAxis = pop.xAxis - xAxis;
           pop.left.yAxis = pop.yAxis + 75;
-
+          this.setLines(pop, pop.left);
         }
         stack.push(pop.right);
         stack.push(pop.left);
 
       }
     }
+  }
 
-
+  setLines(parentNode: TreeNode, childNode: TreeNode) {
+        // set lines
+        this.ctx.beginPath(); // Reset the current path
+        this.ctx.lineWidth = 1;
+        this.ctx.moveTo(childNode.xAxis, childNode.yAxis); // Staring point
+        this.ctx.lineTo(parentNode.xAxis, parentNode.yAxis); // End point
+        this.ctx.stroke(); // Make the line visible
   }
 }

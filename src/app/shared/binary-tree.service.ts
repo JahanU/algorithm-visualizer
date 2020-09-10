@@ -7,52 +7,45 @@ import { TreeNode } from '../shared/models/TreeNode';
 
 export class BinaryTreeService {
 
-  amount: number = 10;
-  preOrderArray: number[] = [];
+  animationSpeed = 500;
+  nodeAmount = 10;
 
-  constructor() {
-    // let root: TreeNode = null;
-    // const res = [1, null, 2, 3, 4, 5, 6, 7];
+  nodes: TreeNode[] = [];
+  arr = [13,14,15,16,17];
+  root = null;
 
-    // while (this.amount-- > 0 && res.length > 0) {
-    //   root = this.insert(root, res.shift());
-    // }
+  constructor() {}
 
-    // console.log(root);
-    // this.preOrderTraversal(root);
+  initTree() {
+    return this.root = this.sortedArrToBST(0, this.arr.length - 1, 0);
   }
 
+  sortedArrToBST(start, end, level): TreeNode {
+    // base case
+    if (start > end)
+      return null;
 
-  insert(root: TreeNode, data: number): TreeNode {
+    let mid = Math.floor(start + (end - start) / 2);
+    let newNode = new TreeNode(this.arr[mid]);
+    newNode.level = level;
 
-    if (root == null) {
-      return new TreeNode(data);
+    newNode.left = this.sortedArrToBST(start, mid - 1, level + 1);
+    newNode.right = this.sortedArrToBST(mid + 1, end, level + 1);
+
+    this.nodes.push(newNode);
+    return newNode;
+  }
+  
+  resetArray(): void {
+    this.arr = [];
+    for (let i = 0; i < this.nodeAmount; i++) {
+      const randInt = this.randomInteger(1, 30);
+      this.arr.push(randInt);
     }
-    else {
-      let curr: TreeNode;
-      if (data <= root.data) {
-        curr = this.insert(root.left, data);
-        root.left = curr;
-      }
-      else {
-        curr = this.insert(root.right, data);
-        root.right = curr;
-      }
-      return root;
-    }
+    this.arr.sort((a,b) => a - b);
   }
 
-  preOrderTraversal(root: TreeNode): number[] {
-    this.dfs(root);
-    return this.preOrderArray;
-  }
+  randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-  dfs(root: TreeNode): void {
-    if (root !== null) {
-      this.preOrderArray.push(root.data);
-      this.dfs(root.left);
-      this.dfs(root.right);
-    }
-  }
 
 }

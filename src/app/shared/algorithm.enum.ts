@@ -1,4 +1,4 @@
-export enum algorithmEnums {
+export enum AlgorithmEnum {
   SELECTED_ALGORITHM = 'Algorithms',
   BUBBLE = 'Bubble Sort',
   INSERTION = 'Insertion Sort',

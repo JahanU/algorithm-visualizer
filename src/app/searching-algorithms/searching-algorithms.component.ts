@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArraysService } from '../shared/arrays.service';
-import { algorithmEnums } from '../shared/algorithm-enum';
-import { LinearSearch } from './algorithms/linear-search';
+import { AlgorithmEnum } from '../shared/algorithm.enum';
 import { BinarySearch } from './algorithms/binary-search';
-import { TreeNode } from '../shared/models/TreeNode';
+import { LinearSearch } from './algorithms/linear-search';
 
 @Component({
   selector: 'app-searching-algorithms',
@@ -12,8 +11,8 @@ import { TreeNode } from '../shared/models/TreeNode';
 })
 export class SearchingAlgorithmsComponent implements OnInit {
 
-  algorithmEnum = algorithmEnums;
-  selectedAlgorithm: algorithmEnums = algorithmEnums.BINARY;
+  algoEnum = AlgorithmEnum;
+  selectedAlgorithm: AlgorithmEnum = AlgorithmEnum.BINARY;
   targetIndex = 0;
 
   constructor(public arrService: ArraysService) { }
@@ -43,14 +42,14 @@ export class SearchingAlgorithmsComponent implements OnInit {
     this.arrService.animationSpeed = event.value;
   }
 
-  displayInfo(pickedAlgo: algorithmEnums): void {
+  displayInfo(pickedAlgo: AlgorithmEnum): void {
     this.selectedAlgorithm = pickedAlgo;
   }
 
   startSorting(): void {
     this.arrService.sorting = true;
-    if (this.selectedAlgorithm === this.algorithmEnum.LINEAR) { this.linearSearch(); }
-    if (this.selectedAlgorithm === this.algorithmEnum.BINARY) { this.binarySearch(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.LINEAR) { this.linearSearch(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.BINARY) { this.binarySearch(); }
   }
 
   getRandomElement(): number {

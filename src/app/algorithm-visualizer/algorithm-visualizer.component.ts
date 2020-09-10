@@ -3,10 +3,9 @@ import { MergeSort } from './algorithms/merge-sort';
 import { BubbleSort } from './algorithms/bubble-sort';
 import { QuickSort } from './algorithms/quick-sort';
 import { InsertionSort } from './algorithms/insertion-sort';
-
 import { ArraysService } from '../shared/arrays.service';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { algorithmEnums } from '../shared/algorithm-enum';
+import { AlgorithmEnum } from '../shared/algorithm.enum';
 import { ArrayBars } from '../shared/models/ArrayBars';
 
 @Component({
@@ -22,8 +21,8 @@ import { ArrayBars } from '../shared/models/ArrayBars';
 })
 export class AlgorithmVisualizerComponent implements OnInit {
 
-  algorithmEnum = algorithmEnums;
-  selectedAlgorithm: algorithmEnums = algorithmEnums.MERGE;
+  algoEnum = AlgorithmEnum;
+  selectedAlgorithm: AlgorithmEnum = AlgorithmEnum.MERGE;
 
   constructor(public arrService: ArraysService) { }
 
@@ -45,16 +44,16 @@ export class AlgorithmVisualizerComponent implements OnInit {
     this.arrService.animationSpeed = event.value;
   }
 
-  displayInfo(pickedAlgo: algorithmEnums): void {
+  displayInfo(pickedAlgo: AlgorithmEnum): void {
     this.selectedAlgorithm = pickedAlgo;
   }
 
   startSorting(): void {
     this.arrService.sorting = true;
-    if (this.selectedAlgorithm === this.algorithmEnum.BUBBLE) { this.bubbleSort(); }
-    if (this.selectedAlgorithm === this.algorithmEnum.INSERTION) { this.insertionSort(); }
-    if (this.selectedAlgorithm === this.algorithmEnum.MERGE) { this.mergeSort(); }
-    if (this.selectedAlgorithm === this.algorithmEnum.QUICK) { this.quickSort(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.BUBBLE) { this.bubbleSort(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.INSERTION) { this.insertionSort(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.MERGE) { this.mergeSort(); }
+    if (this.selectedAlgorithm === AlgorithmEnum.QUICK) { this.quickSort(); }
   }
 
   bubbleSort(): void {

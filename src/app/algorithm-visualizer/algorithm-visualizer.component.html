@@ -2,25 +2,26 @@
   <button type="button" [disabled]="arrService.sorting" class="btn btn-primary" (click)="resetArray()">
     Generate New Array
   </button>
-
   <div class="btn-group" dropdown [insideClick]="true">
     <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
       aria-controls="dropdown-animated" [disabled]="arrService.sorting">
       {{ selectedAlgorithm }} <span class="caret"></span>
     </button>
     <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
-      [disabled]="arrService.sorting">
+    >
+            <!-- [disabled]="arrService.sorting"> -->
+
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.BUBBLE)">Bubble Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.BUBBLE)">{{algoEnum.BUBBLE}}</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.INSERTION)">Insertion Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.INSERTION)">{{algoEnum.INSERTION}}</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.MERGE)">Merge Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.MERGE)">{{algoEnum.MERGE}}</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.QUICK)">Quick Sort</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.QUICK)">{{algoEnum.QUICK}}</a>
       </li>
     </ul>
   </div>
@@ -53,15 +54,15 @@
             <td>
               <div class="rectangle" [ngStyle]="{'background-color': 'red'}"> </div>
             </td>
-            <td>{{algorithmEnum.RED_BAR}} </td>
-            <td *ngIf="selectedAlgorithm == algorithmEnum.QUICK">
+            <td>{{algoEnum.RED_BAR}} </td>
+            <td *ngIf="selectedAlgorithm == algoEnum.QUICK">
               <div class="rectangle" [ngStyle]="{'background-color': 'orange'}"> </div>
             </td>
-            <td *ngIf="selectedAlgorithm == algorithmEnum.QUICK">{{algorithmEnum.ORANGE_BAR}} </td>
+            <td *ngIf="selectedAlgorithm == algoEnum.QUICK">{{algoEnum.ORANGE_BAR}} </td>
             <td>
               <div class="rectangle" [ngStyle]="{'background-color': 'green'}"> </div>
             </td>
-            <td>{{algorithmEnum.GREEN_BAR}} </td>
+            <td>{{algoEnum.GREEN_BAR}} </td>
           </tr>
           <tr>
           </tr>

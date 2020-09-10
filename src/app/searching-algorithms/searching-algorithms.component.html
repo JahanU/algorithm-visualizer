@@ -9,12 +9,13 @@
       {{ selectedAlgorithm }} <span class="caret"></span>
     </button>
     <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated"
-      [disabled]="arrService.sorting">
+    >
+          <!-- [disabled]="arrService.sorting"> -->
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.BINARY)">Binary Search</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.BINARY)">{{algoEnum.BINARY}}</a>
       </li>
       <li role="menuitem">
-        <a class="dropdown-item" (click)="displayInfo(algorithmEnum.LINEAR)">Linear Search</a>
+        <a class="dropdown-item" (click)="displayInfo(algoEnum.LINEAR)">{{algoEnum.LINEAR}}</a>
       </li>
     </ul>
   </div>
@@ -47,7 +48,7 @@
             <td>
               <div class="rectangle" [ngStyle]="{'background-color': 'red'}"> </div>
             </td>
-            <td>{{algorithmEnum.RED_BAR}} </td>
+            <td>{{algoEnum.RED_BAR}} </td>
 
           </tr>
           <tr>
