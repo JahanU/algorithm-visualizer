@@ -25,19 +25,18 @@ export class BinaryTreeComponent implements OnInit {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
-    this.clearCanvas();
     this.initBinaryTree();
   }
 
   initBinaryTree() {
+    this.clearCanvas();
     this.root = this.binTreeService.initTree();
     this.createNodes(this.root);
     this.displayNodes();
   }
 
-  resetArray() {
-    this.clearCanvas();
-    this.binTreeService.resetArray();
+  resetNodes() {
+    this.binTreeService.generateNewNodes();
     this.initBinaryTree();
   }
 
@@ -47,8 +46,7 @@ export class BinaryTreeComponent implements OnInit {
   
   pitchSize(event: any): void {
     this.binTreeService.nodeAmount = event.value;
-    this.binTreeService.resetArray();
-    console.log(this.binTreeService.nodeAmount);
+    this.resetNodes();
   }
 
   pitchSpeed = (event: any) => this.binTreeService.animationSpeed = event.value;

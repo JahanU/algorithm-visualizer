@@ -11,13 +11,15 @@ export class BinaryTreeService {
   nodeAmount = 10;
 
   nodes: TreeNode[] = [];
-  arr = [13,14,15,16,17];
+  nodeValues: number[] = [];
   root = null;
 
-  constructor() {}
+  constructor() {
+    this.generateNewNodes();
+  }
 
   initTree() {
-    return this.root = this.sortedArrToBST(0, this.arr.length - 1, 0);
+    return this.root = this.sortedArrToBST(0, this.nodeValues.length - 1, 0);
   }
 
   sortedArrToBST(start, end, level): TreeNode {
@@ -26,7 +28,7 @@ export class BinaryTreeService {
       return null;
 
     let mid = Math.floor(start + (end - start) / 2);
-    let newNode = new TreeNode(this.arr[mid]);
+    let newNode = new TreeNode(this.nodeValues[mid]);
     newNode.level = level;
 
     newNode.left = this.sortedArrToBST(start, mid - 1, level + 1);
@@ -36,13 +38,16 @@ export class BinaryTreeService {
     return newNode;
   }
   
-  resetArray(): void {
-    this.arr = [];
-    for (let i = 0; i < this.nodeAmount; i++) {
+  generateNewNodes(): void {
+    this.nodeValues = [];
+    this.nodes = [];
+    do {
       const randInt = this.randomInteger(1, 30);
-      this.arr.push(randInt);
+      if (!this.nodeValues.includes(randInt))
+        this.nodeValues.push(randInt);
     }
-    this.arr.sort((a,b) => a - b);
+    while (this.nodeValues.length <= this.nodeAmount)
+    this.nodeValues.sort((a,b) => a - b);
   }
 
   randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min

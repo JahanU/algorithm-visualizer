@@ -24,7 +24,6 @@ export class ArraysService {
   $swappedIndex: string = 'green';
   $targetIndex: string = 'orange';
 
-
   completedAnimation: AnimationValues[] = []; // Iterating the array once last time, to show it is completed
 
   constructor() { }
