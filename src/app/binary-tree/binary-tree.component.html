@@ -31,11 +31,15 @@
   </button>
 
     <small>Array Size</small>
-    <mat-slider thumbLabel tickInterval="auto" min="4" max="20" (input)="pitchSize($event)" value="{{ binTreeService.nodeAmount }}"></mat-slider>
+    <mat-slider thumbLabel tickInterval="auto" min="4" max="30" (input)="pitchSize($event)" value="{{ binTreeService.nodeAmount }}"></mat-slider>
 
     <small>Iteration Speed </small>
     <mat-slider id="speedSlider" thumbLabel tickInterval="auto" min="0" max="1000" (input)="pitchSpeed($event)" value="{{ binTreeService.animationSpeed }}">
     </mat-slider>
 </mat-toolbar>
+
+<div>
+    <span *ngFor="let data of visitedNodes">[{{data}}]  </span>
+</div>
 
 <canvas #canvas width="1000" height="1000"></canvas>

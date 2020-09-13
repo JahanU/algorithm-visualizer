@@ -4,7 +4,7 @@ import { BinaryTreeService } from '../../shared/binary-tree.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Colours } from '../../shared/colours.enum';
 
-export class PreOrder {
+export class InOrder {
 
   animationNodes = [];
   visitedNodes: number[] = [];
@@ -21,22 +21,22 @@ export class PreOrder {
     this.visitedNodes = visitedNodes;
   }
 
-  preOrderTraversal(root: TreeNode) {
+  inOrderTraversal(root: TreeNode) {
     let stack = [];
-
-    stack.push(root);
-    while (stack.length > 0) {
-      let pop = stack.pop();
-      if (pop) {
-        this.animationNodes.push(pop);
-        stack.push(pop.right);
-        stack.push(pop.left);
+    
+    while (stack.length > 0 || root != null) {
+      while (root != null) {
+        stack.push(root);
+        root = root.left;
       }
+      let pop = stack.pop();
+      stack.push(pop);
+      root = pop.right;
     }
-    this.preOrderAnimation();
+    this.inOrderAnimation();
   }
 
-  preOrderAnimation() {
+  inOrderAnimation() {
 
     const bt = new BinaryTreeComponent(this.treeService);   
 
@@ -59,6 +59,8 @@ export class PreOrder {
         clearInterval(timer);
       }
     }, this.treeService.animationSpeed)
+    
+
   }
 
   highlightNode(node: TreeNode) {
@@ -75,6 +77,6 @@ export class PreOrder {
     this.ctx.font = "30px Arial";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(node.data.toString(), node.xAxis, node.yAxis + 10);
+    this.ctx.fillText(node.data.toString(),node.xAxis, node.yAxis + 10);
   }
 }
