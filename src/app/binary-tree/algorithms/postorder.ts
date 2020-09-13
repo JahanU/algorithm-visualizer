@@ -4,38 +4,38 @@ import { BinaryTreeService } from '../../shared/binary-tree.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Colours } from '../../shared/colours.enum';
 
-export class PreOrder {
+export class PostOrder {
 
-  animationNodes = [];
-  visitedNodes: TreeNode[] = [];
-  coloursEnum = Colours;
-  ctx: CanvasRenderingContext2D;
-  canvas: ElementRef<HTMLCanvasElement>;
+    animationNodes = [];
+    visitedNodes: TreeNode[] = [];
+    coloursEnum = Colours;
+    ctx: CanvasRenderingContext2D;
+    canvas: ElementRef<HTMLCanvasElement>;
 
-  constructor(public treeService:  BinaryTreeService,
+    constructor(public treeService:  BinaryTreeService,
       ctx: CanvasRenderingContext2D,
       canvas:  ElementRef<HTMLCanvasElement>, 
       visitedNodes: TreeNode[]) {
     this.ctx = ctx;
     this.canvas = canvas;
     this.visitedNodes = visitedNodes;
-  }
+    }
 
-  preOrderTraversal(root: TreeNode) {
+  postOrderTraversal(root: TreeNode) {
     let stack = [];
     stack.push(root);
     while (stack.length > 0) {
-      let pop = stack.pop();
-      if (pop) {
-        this.animationNodes.push(pop);
-        stack.push(pop.right);
-        stack.push(pop.left);
-      }
+        let pop = stack.pop();
+        if (pop) {
+            stack.push(pop.left);
+            stack.push(pop.right);
+            this.animationNodes.unshift(pop);
+        }
     }
-    this.preOrderAnimation();
+    this.postOrderAnimation();
   }
 
-  preOrderAnimation() {
+  postOrderAnimation() {
     let timer = setInterval(() => {     
       let action = this.animationNodes.shift();
       if (action) {
@@ -44,7 +44,7 @@ export class PreOrder {
               node.colour = 'green';
               this.highlightNode(node);
             }
-            else if (node.data == action.data) {
+            else if (node.data === action.data) {
               node.colour = this.coloursEnum.SELECTED;
               this.highlightNode(node);
               this.visitedNodes.push(node);

@@ -7,7 +7,7 @@ import { Colours } from '../../shared/colours.enum';
 export class InOrder {
 
   animationNodes = [];
-  visitedNodes: number[] = [];
+  visitedNodes: TreeNode[] = [];
   coloursEnum = Colours;
   ctx: CanvasRenderingContext2D;
   canvas: ElementRef<HTMLCanvasElement>;
@@ -15,7 +15,7 @@ export class InOrder {
   constructor(public treeService:  BinaryTreeService,
       ctx: CanvasRenderingContext2D,
       canvas:  ElementRef<HTMLCanvasElement>, 
-      visitedNodes: number[]) {
+      visitedNodes: TreeNode[]) {
     this.ctx = ctx;
     this.canvas = canvas;
     this.visitedNodes = visitedNodes;
@@ -25,29 +25,34 @@ export class InOrder {
     let stack = [];
     
     while (stack.length > 0 || root != null) {
-      while (root != null) {
-        stack.push(root);
-        root = root.left;
-      }
-      let pop = stack.pop();
-      stack.push(pop);
-      root = pop.right;
+        while (root != null) {
+          stack.push(root);
+          root = root.left;
+        }
+        let pop = stack.pop();
+        this.animationNodes.push(pop);
+        root = pop.right;
     }
     this.inOrderAnimation();
   }
 
   inOrderAnimation() {
-
-    const bt = new BinaryTreeComponent(this.treeService);   
-
     let timer = setInterval(() => {     
       let action = this.animationNodes.shift();
       if (action) {
           this.treeService.nodes.forEach((node) => {
-            if (node.data == action.data) {
-              node.colour = this.coloursEnum.TARGET;
+            if (this.animationNodes.length <= 0) {
+              node.colour = 'green';
               this.highlightNode(node);
-              this.visitedNodes.push(node.data);
+            }
+            else if (node.data == action.data) {
+              node.colour = this.coloursEnum.SELECTED;
+              this.highlightNode(node);
+              this.visitedNodes.push(node);
+            }
+            else if (this.visitedNodes.includes(node)) {
+              node.colour = 'green';
+              this.highlightNode(node);
             }
             else {
               node.colour = 'white';

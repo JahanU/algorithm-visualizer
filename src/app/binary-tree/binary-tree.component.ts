@@ -1,3 +1,4 @@
+import { PostOrder } from './algorithms/postorder';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { TreeNode } from '../shared/models/TreeNode';
 import { PreOrder } from './algorithms/preorder';
@@ -20,8 +21,7 @@ export class BinaryTreeComponent implements OnInit {
   treeEnum = TreeEnum;
   selectedAlgorithm: TreeEnum = TreeEnum.PRE_ORDER;
   nodes: TreeNode[] = [];
-  visitedNodes: number[] = [];
-
+  visitedNodes: TreeNode[] = [];
   root = null;
 
   constructor(public binTreeService:  BinaryTreeService) { }
@@ -39,6 +39,7 @@ export class BinaryTreeComponent implements OnInit {
   }
 
   resetNodes() {
+    this.visitedNodes = [];
     this.binTreeService.generateNewNodes();
     this.initBinaryTree();
   }
@@ -58,7 +59,7 @@ export class BinaryTreeComponent implements OnInit {
   startSorting() {
     if (this.selectedAlgorithm == TreeEnum.PRE_ORDER) this.preOrder();
     if (this.selectedAlgorithm == TreeEnum.IN_ORDER) this.inOrder();
-
+    if (this.selectedAlgorithm == TreeEnum.POST_ORDER) this.postOrder();
   }
 
   preOrder() {
@@ -69,6 +70,11 @@ export class BinaryTreeComponent implements OnInit {
   inOrder() {
     const obj = new InOrder(this.binTreeService, this.ctx, this.canvas, this.visitedNodes);
     obj.inOrderTraversal(this.root);
+  }
+  
+  postOrder() {
+    const obj = new PostOrder(this.binTreeService, this.ctx, this.canvas, this.visitedNodes);
+    obj.postOrderTraversal(this.root);
   }
 
   
