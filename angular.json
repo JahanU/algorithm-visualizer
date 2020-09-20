@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "algorithm-visualizer"
+  "defaultProject": "algorithm-visualizer",
+  "cli": {
+    "analytics": "319bdf9a-65a8-4b12-a22a-c475e1da1e31"
+  }
 }
