@@ -7,7 +7,7 @@ import { ArrayBars } from '../shared/models/ArrayBars';
 export class ArraysService {
 
   public arrayLength: number = 10;
-  public animationSpeed: number = 0;
+  public animationSpeed: number = 200;
   public barWidth: number = 32;
   numbers: ArrayBars[];
 
